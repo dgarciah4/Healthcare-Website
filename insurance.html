@@ -7,10 +7,10 @@
     <link rel="stylesheet" type="text/css" href="includes/bootstrap-5.0.2-dist/css/bootstrap.css">
   </head>
   <script type="text/javascript" src="includes/js/script.js"></script>
-  <body>
+  <body class="siteBackground">
 
     <div class="container row justify-content-md-center menuBackgound">
-      <span>MAIN MESSAGES DATA <B>INSURANCE</B></span>
+      <span>MAIN MESSAGES DATA <B>INSURANCE</B> CLAIMS</span>
     </div>
     <BR>
 
@@ -43,7 +43,7 @@
         <div class="col-5">
           <button id="insurance1button" onclick="insurance1buttonClick()" type="button" class="btn btn-primary btn-sm">Edit</button>
           <button type="button" class="btn btn-primary btn-sm" disabled>Remove</button>
-          <button type="button" class="btn btn-primary btn-sm">Claims</button>
+          <button id="claims1button" onclick="navigateClaims(1)" type="button" class="btn btn-primary btn-sm">Claims</button>
         </div>
         <div id="insurance1Editdiv" class="hiddenSection">
         HERE WE HAVE STUFF TO EDIT THE INSURANCE
@@ -60,17 +60,68 @@
             <p class="fs-6">BCBS PPO</p>
           </div>
           <div class="col-2">
-            <p class="fs-6">J08123-YIAL-19230-3</p>
+            <p class="fs-6 text-truncate">J08123-YIAL-19230-3</p>
           </div>
           <div class="col-5">
             <button id="insurance2button" onclick="insurance2buttonClick()" type="button" class="btn btn-primary btn-sm">Edit</button>
             <button type="button" class="btn btn-primary btn-sm" disabled>Remove</button>
-            <button type="button" class="btn btn-primary btn-sm">Claims</button>
+            <button id="claims2button" onclick="navigateClaims(2)" type="button" class="btn btn-primary btn-sm">Claims</button>
           </div>
 
       </div>
 
+      <div class="row justify-content-md-center" id="insurance3div">
+        <div class="col-2">
+          <p class="fs-6">Precription</p>
+        </div>
+        <div class="col-3">
+          <p class="fs-6">QuickScripts</p>
+        </div>
+        <div class="col-2">
+          <p class="fs-6 text-truncate">WAC-919</p>
+        </div>
+        <div class="col-5">
+          <button id="insurance3button" onclick="insurance2buttonClick()" type="button" class="btn btn-primary btn-sm">Edit</button>
+          <button type="button" class="btn btn-primary btn-sm" disabled>Remove</button>
+          <button id="claims3button" onclick="navigateClaims(3)" type="button" class="btn btn-primary btn-sm">Claims</button>
+        </div>
 
+    </div>
+
+      <div id="insuranceAddButtondiv">
+      <div class="row justify-content-md-center" id="">
+        <div class="col-7">
+          <p class="fs-6"><!--SPACER--></p>
+        </div>
+        <div class="col-5">
+          <button id="insuranceAddbutton" onclick="insuranceAddbuttonClick()" type="button" class="btn btn-primary btn-sm"> Add Insurance Provider </button>
+        </div>
+      </div>
+    </div>
+
+      <div id="insuranceAddSavediv" class="hiddenSection">
+      <div class="row justify-content-md-center hiddenSection" id="">
+        <div class="col-2">
+          <p class="fs-6">
+            <input id="addType" type="text" class="form-control" aria-label="" aria-describedby="inputGroup-sizing-sm">
+          </p>
+        </div>
+        <div class="col-3">
+          <p class="fs-6">
+            <input id="addProvider" type="text" class="form-control" aria-label="" aria-describedby="inputGroup-sizing-sm">
+          </p>
+        </div>
+        <div class="col-2">
+          <p class="fs-6">
+            <input id="addGroup" type="text" class="form-control" aria-label="" aria-describedby="inputGroup-sizing-sm">
+          </p>
+        </div>
+        <div class="col-5">
+          <button onclick="insuranceAddSaveButtonClick()" type="button" class="btn btn-primary btn-sm">Save</button>
+          <button onclick="insuranceAddClearButtonClick()" type="button" class="btn btn-primary btn-sm">Clear</button>
+        </div>
+      </div>
+    </div>
     </div>
 
 
