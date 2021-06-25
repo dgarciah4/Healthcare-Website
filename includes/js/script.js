@@ -1,7 +1,7 @@
 
 var sectionList = ["mainPage","resume","contact","portfolio"];
 
-var myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {});
+//var myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {});
 
 function navigateClaims(insuranceId){
 
@@ -24,8 +24,20 @@ function clearFilters(){
 
 }
 
+function insuranceNavPanelButtonClick(){
 
+    document.getElementById("mainContent").src="insurance.html";
+}
 
+function claimsNavPanelButtonClick(){
+
+    document.getElementById("mainContent").src="claims.html";
+}
+
+function patientHistoryNavPanelButtonClick(){
+
+    document.getElementById("mainContent").src="patientHistory.html";
+}
 
 function insurance1buttonClick(){
   //BSL TODO maybe here we have a service that gets the contents of the div and replaces the existing row instead of revealing a div

@@ -12,10 +12,35 @@
 }
 
 
+.navButtonSpan{
 
+    background-color: #0a53be;
 
+}
 
+.navPanelStyle{
+    background-color: darkgrey;
+    border: black;
+    border-style: solid;
+    padding-left: 4px;
+}
 
+.topRibbon {
+    background-color: darkgrey;
+    border: black;
+    border-style: solid;
+
+}
+
+.contentPanel {
+    border: black;
+    border-style: solid;
+    width: 100%;
+    height: 100%;
+    overflow-y: hidden;
+    overflow-x: -moz-hidden-unscrollable;
+    overflow: -moz-scrollbars-none;
+}
 
 
 
