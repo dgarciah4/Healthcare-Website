@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Insurance wireframe</title>
+    <link rel="stylesheet" type="text/css" href="includes/css/style.css">
+    <link rel="stylesheet" type="text/css" href="includes/bootstrap-5.0.2-dist/css/bootstrap.css">
+  </head>
+  <script type="text/javascript" src="includes/js/script.js"></script>
+  <body>
+
+    <div class="container row justify-content-md-center menuBackgound">
+      <span>MAIN MESSAGES DATA <B>INSURANCE</B></span>
+    </div>
+    <BR>
+
+    <div class="container">
+      <div class="row justify-content-md-center">
+        <div class="col-2 h5">
+          Type
+        </div>
+        <div class="col-3 h5">
+          Provider
+        </div>
+        <div class="col-2 h5">
+          Group/family
+        </div>
+        <div class="col-5 h5">
+          Buttons
+        </div>
+      </div>
+
+      <div class="row justify-content-md-center" id="insurance1div">
+        <div class="col-2">
+          <p class="fs-6">Dental</p>
+        </div>
+        <div class="col-3">
+          <p class="fs-6">Delta</p>
+        </div>
+        <div class="col-2">
+          <p class="fs-6">G32435/X</p>
+        </div>
+        <div class="col-5">
+          <button id="insurance1button" onclick="insurance1buttonClick()" type="button" class="btn btn-primary btn-sm">Edit</button>
+          <button type="button" class="btn btn-primary btn-sm" disabled>Remove</button>
+          <button type="button" class="btn btn-primary btn-sm">Claims</button>
+        </div>
+        <div id="insurance1Editdiv" class="hiddenSection">
+        HERE WE HAVE STUFF TO EDIT THE INSURANCE
+        <button id="insurance1Savebutton" onclick="reloadPageClick()" type="button" class="btn btn-primary btn-sm">Save</button>
+        </div>
+
+      </div>
+
+        <div class="row justify-content-md-center" id="insurance2div">
+          <div class="col-2">
+            <p class="fs-6">Health</p>
+          </div>
+          <div class="col-3">
+            <p class="fs-6">BCBS PPO</p>
+          </div>
+          <div class="col-2">
+            <p class="fs-6">J08123-YIAL-19230-3</p>
+          </div>
+          <div class="col-5">
+            <button id="insurance2button" onclick="insurance2buttonClick()" type="button" class="btn btn-primary btn-sm">Edit</button>
+            <button type="button" class="btn btn-primary btn-sm" disabled>Remove</button>
+            <button type="button" class="btn btn-primary btn-sm">Claims</button>
+          </div>
+
+      </div>
+
+
+    </div>
+
+
+  </body>
