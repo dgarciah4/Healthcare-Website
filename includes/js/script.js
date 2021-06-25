@@ -17,6 +17,12 @@ myModal.show();
 
 }
 
+function clearFilters(){
+
+    alert("This will clear any filters on the data");
+
+
+}
 
 
 
