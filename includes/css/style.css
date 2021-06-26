@@ -1,3 +1,7 @@
+body {
+    overflow:hidden;
+}
+
 .overarchingContainer{
   width: 600px;
   height: 600px;
@@ -29,6 +33,7 @@
     background-color: darkgrey;
     border: black;
     border-style: solid;
+    font-size: x-small;
 
 }
 
@@ -37,9 +42,7 @@
     border-style: solid;
     width: 100%;
     height: 100%;
-    overflow-y: hidden;
-    overflow-x: -moz-hidden-unscrollable;
-    overflow: -moz-scrollbars-none;
+    overflow: no-display;
 }
 
 
