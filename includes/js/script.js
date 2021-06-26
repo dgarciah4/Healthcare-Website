@@ -10,12 +10,12 @@ window.location.href="claims.html?insuranceId=" + insuranceId;
 
 }
 
-function claim1DetailsbuttonClick(){
+function orderNavPanelButtonClick(){
 
-myModal.show();
-
+    document.getElementById("mainContent").src="ordersPatient.html";
 
 }
+
 
 function clearFilters(){
 
@@ -92,6 +92,20 @@ location.reload();
   return false;
 
 }
+
+
+
+function claim1DetailsbuttonClick(){
+
+    myModal.show();
+
+
+}
+
+
+
+
+
 
 
 
