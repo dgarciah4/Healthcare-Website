@@ -1,9 +1,11 @@
 
 var sectionList = ["mainPage","resume","contact","portfolio"];
 
-//var myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {});
+var myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {});
 
 function navigateClaims(insuranceId){
+
+    alert("This will navigate to the claims window with a filter on which claims are displayed");
 
 window.location.href="claims.html?insuranceId=" + insuranceId;
 
@@ -21,6 +23,13 @@ function clearFilters(){
 
     alert("This will clear any filters on the data");
 
+
+}
+
+function selectPatientNavPanelButtonClick(){
+
+    alert("this will allow a provider to search for and select a particular patient. once selected the patientId is pushed to the session object in back end");
+    document.getElementById("mainContent").src="patientSelect.html";
 
 }
 
