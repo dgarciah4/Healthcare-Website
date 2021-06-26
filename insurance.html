@@ -41,7 +41,7 @@
         <div class="col-5">
           <button id="insurance1button" onclick="insurance1buttonClick()" type="button" class="btn btn-primary btn-sm">Edit</button>
           <button type="button" class="btn btn-primary btn-sm" disabled>Remove</button>
-          <button id="claims1button" onclick="navigateClaims(1)" type="button" class="btn btn-primary btn-sm">Claims</button>
+          <button id="claims1button" onclick="navigateClaims(1)" type="button" class="btn btn-primary btn-sm">Claims</button>TODO NEED TO MAKE
         </div>
         <div id="insurance1Editdiv" class="hiddenSection">
         HERE WE HAVE STUFF TO EDIT THE INSURANCE ... or maybe a modal? ... and/or disable the buttons?
@@ -63,7 +63,7 @@
           <div class="col-5">
             <button id="insurance2button" onclick="insurance2buttonClick()" type="button" class="btn btn-primary btn-sm">Edit</button>
             <button type="button" class="btn btn-primary btn-sm" disabled>Remove</button>
-            <button id="claims2button" onclick="navigateClaims(2)" type="button" class="btn btn-primary btn-sm">Claims</button>
+            <button id="claims2button" onclick="navigateClaims(2)" type="button" class="btn btn-primary btn-sm">Claims</button>BETTER USE OF
           </div>
 
       </div>
@@ -81,7 +81,7 @@
         <div class="col-5">
           <button id="insurance3button" onclick="insurance2buttonClick()" type="button" class="btn btn-primary btn-sm">Edit</button>
           <button type="button" class="btn btn-primary btn-sm" disabled>Remove</button>
-          <button id="claims3button" onclick="navigateClaims(3)" type="button" class="btn btn-primary btn-sm">Claims</button>
+          <button id="claims3button" onclick="navigateClaims(3)" type="button" class="btn btn-primary btn-sm">Claims</button>REAL ESTATE
         </div>
 
     </div>
@@ -100,19 +100,22 @@
       <div id="insuranceAddSavediv" class="hiddenSection">
       <div class="row justify-content-md-center hiddenSection" id="asd">
         <div class="col-2">
-          <p class="fs-6">
-            <input id="addType" type="text" class="form-control" aria-label="" aria-describedby="inputGroup-sizing-sm">
-          </p>
+          <div class=" form-floating mb-3">
+            <input id="addType" type="text" class="form-control" placeholder="Type">
+            <label for="addType">Type</label>
+          </div>
         </div>
         <div class="col-3">
-          <p class="fs-6">
-            <input id="addProvider" type="text" class="form-control" aria-label="" aria-describedby="inputGroup-sizing-sm">
-          </p>
+          <div class=" form-floating mb-3">
+            <input id="addProvider" type="text" class="form-control" placeholder="Provider">
+            <label for="addProvider">Provider</label>
+          </div>
         </div>
         <div class="col-2">
-          <p class="fs-6">
-            <input id="addGroup" type="text" class="form-control" aria-label="" aria-describedby="inputGroup-sizing-sm">
-          </p>
+          <div class=" form-floating mb-3">
+            <input id="addGroup" type="text" class="form-control" placeholder="Group or Family">
+            <label for="addGroup">Group or Family</label>
+          </div>
         </div>
         <div class="col-5">
           <button onclick="insuranceAddSaveButtonClick()" type="button" class="btn btn-primary btn-sm">Save</button>

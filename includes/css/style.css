@@ -2,10 +2,38 @@ body {
     overflow:hidden;
 }
 
-.overarchingContainer{
-  width: 600px;
-  height: 600px;
+.completeWrapper{
+
+
 }
+
+
+.topRibbon {
+    background-color: darkgrey;
+    border: black;
+    border-style: solid;
+    font-size: x-small;
+
+}
+
+.navPanel{
+    background-color: darkgrey;
+    padding: 10px;
+}
+
+.contentPanel {
+    overflow: no-display;
+    padding-left: 15px;
+    padding-top: 40px;
+
+}
+
+
+
+
+
+
+
 
 .menuBackgound{
   background-color: green;
@@ -22,28 +50,8 @@ body {
 
 }
 
-.navPanelStyle{
-    background-color: darkgrey;
-    border: black;
-    border-style: solid;
-    padding-left: 4px;
-}
 
-.topRibbon {
-    background-color: darkgrey;
-    border: black;
-    border-style: solid;
-    font-size: x-small;
 
-}
-
-.contentPanel {
-    border: black;
-    border-style: solid;
-    width: 100%;
-    height: 100%;
-    overflow: no-display;
-}
 
 
 
