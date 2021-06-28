@@ -1,7 +1,7 @@
 
 var sectionList = ["mainPage","resume","contact","portfolio"];
 
-var myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {});
+//var myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {});
 
 function navigateClaims(insuranceId){
 
@@ -15,6 +15,20 @@ window.location.href="claims.html?insuranceId=" + insuranceId;
 function orderNavPanelButtonClick(){
 
     document.getElementById("mainContent").src="ordersPatient.html";
+
+}
+
+var nextCalendar = "patientCalendar.html";
+
+function intakeCalendarNavPanelButtonClick() {
+
+    //toggle between the calendars
+    document.getElementById("mainContent").src=nextCalendar;
+    if(nextCalendar==="patientCalendar.html"){
+        nextCalendar="intakeCalendar.html";
+    }else {
+        nextCalendar="patientCalendar.html";
+    }
 
 }
 
