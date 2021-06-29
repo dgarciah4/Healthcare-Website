@@ -6,8 +6,344 @@
   <link rel="stylesheet" type="text/css" href="includes/css/style.css">
   <link rel="stylesheet" type="text/css" href="includes/bootstrap-5.0.2-dist/css/bootstrap.css">
 </head>
+<style>
+  body {
+    overflow: hidden;
+  }
+</style>
 <script type="text/javascript" src="includes/js/script.js"></script>
 <body class="siteBackground">
+  <h3>Patient History Form</h3><br>
+  <form class="form-inline">
+    <div class="form-group" style="display: flex;">
+      <label for="fname">First Name:</label>
+      <input type="text" id="fname" name="fname" value="" placeholder="John" class="form-control" style="width: 200px;">
+      <label for="mname">&nbsp Middle:</label>
+      <input type="text" id="fname" name="fname" value="" placeholder="N/A if none" class="form-control" style="width: 200px;">
+      <label for="lname">&nbsp Last Name:</label>
+      <input type="text" id="lname" name="lname" value="" placeholder="Doe" class="form-control" style="width: 200px;">
+      </div><br>
+    </div>
 
-HEHRHERHEHRHEHRER
+    <div class="form-inline">
+      <div class="form-group" style="display: flex;">
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" value="" placeholder="16th park avenue" class="form-control" style="width: 200px;">
+        <label for="city">&nbsp City:</label>
+        <input type="text" id="city" name="city" value="" placeholder="Birmingham" class="form-control" style="width: 200px;">
+        <label for="state">&nbsp State:</label>
+        <input type="text" id="state" name="state" value="" placeholder="AL" class="form-control" style="width: 200px;">
+        <label for="zip">&nbsp Zip:</label>
+        <input type="text" id="zip" name="zip" value="" style="width: 160px;" placeholder="35886" class="form-control" style="width: 200px;"><br><br>
+      </div>
+    </div><br>
+
+    <div class="form-inline">
+      <div class="form-group" style="display: flex;">
+        <label for="homephone">Phone (H):</label>
+        <input type="text" id="homephone" name="homephone" value="" placeholder="206-235-6589" class="form-control" style="width: 200px;">
+        <label for="cell/work phone">&nbsp Phone (C/W):</label>
+        <input type="text" id="cell/work phone" name="cell/work phone" value="" placeholder="206-235-6589" class="form-control" style="width: 200px;">
+        <label for="dob">&nbsp DOB:</label>
+        <input type="text" id="dob" name="dob" value="" placeholder="01/26/2009" style="width: 115px;" class="form-control">
+        <label for="ss#">&nbsp SS#:</label>
+        <input type="text" id="ss#" name="ss#" value="" placeholder="956-35-4568" style="width: 120px;" class="form-control"><br><br>
+      </div>
+    </div><br>
+
+    <div class="form-inline">
+      <div class="form-group" style="display: flex;">
+        <label for="occupation">Occupation:</label>
+        <input type="text" id="occupation" name="occupation" value="" class="form-control" style="width: 200px;">
+        <label for="Employer">&nbsp Employer:</label>
+        <input type="text" id="Employer" name="Employer" value="" class="form-control" style="width: 200px;">
+        <label for="email">&nbsp Email:</label>
+        <input type="text" id="email" name="email" value="" class="form-control" style="width: 200px;">
+      </div><br>
+      <div class="form-inline">
+        <div class="form-group" style="display: flex;">
+          <label for="insuranceprovider">Insurance Provider:</label>
+          <input type="text" id="insuranceprovider" name="insuranceprovider" value="" class="form-control" style="width: 200px;">
+        </div><br>
+      </div>
+      <p>What is your sexual orientation?</p>
+      <div class="row">
+        <div class="col-1">
+          <input type="radio" id="gender" name="male" value="male" class="form-check-input">
+          <label for="gender" class="form-check-label">male</label>
+          <input type="radio" id="gender" name="female" value="female" class="form-check-input">
+          <label for="gender" class="form-check-label">female</label>
+        </div>
+      </div><br>
+      <p>What is your current relationship status?</p>
+      <div class="row">
+        <div class="col-1">
+          <input type="radio" id="status" name="single" value="single" class="form-check-input">
+          <label for="status" class="form-check-label">single</label>
+          <input type="radio" id="status" name="married" value="married" class="form-check-input">
+          <label for="status" class="form-check-label">married</label>
+        </div>
+      </div><br>
+    </div>
+        <p>Have you ever visited us before?</p>
+        <div>
+          <div class="row">
+            <div class="col-1">
+              <input type="checkbox" id="visitation" name="yes" value="yes" class="form-check-input">
+              <label for="visitation" class="form-check-label">yes</label>
+              <input type="checkbox" id="visitation" name="no" value="no" class="form-check-input">
+              <label for="visitation" class="form-check-label">no</label>
+            </div>
+          </div>
+        </div>
+    </div><br>
+
+   <div class="form-inline">
+     <div class="form-group" style="display: flex;">
+      <label for="lastvisit">If so, please provide the date of your visit:</label>
+      <input type="text" id="lastvisit" name="lastvisit" value="" placeholder="02/23/2021" class="form-control" style="width: 150px;"><br><br>
+     </div>
+   </div><br>
+
+    <p><u>Health History:</u>&nbsp(Make sure to check all that apply)</p>
+
+    <p>Please check all of the boxes below that apply to you.</p>
+    <div>
+      <div class="row">
+          <div class="col-1">
+              <input type="checkbox" id="acid reflux" name="acid reflux" value="acid reflux" class="form-check-input">
+              <label for="acid reflux" class="form-check-label">acid reflux</label>
+          </div>
+          <div class="col-1">
+              <input type="checkbox" id="cataracts" name="cataracts" value="cataracts" class="form-check-input">
+              <label for="cataracts" class="form-check-label">cataracts &nbsp</label>
+          </div>
+          <div class="col-1">
+              <input type="checkbox" id="heart disease" name="heart disease" value="heart disease" class="form-check-input">
+              <label for="heart disease" class="form-check-label">heart disease &nbsp</label>
+          </div>
+          <div class="col-1">
+            <input type="checkbox" id="crohns" name="crohns" value="crohns" class="form-check-input">
+            <label for="crohns" class="form-check-label">crohns &nbsp</label>
+          </div>
+          <div class="col-1">
+              <input type="checkbox" id="Alcohol/Drugs" name="Alcohol/Drugs" value="Alcohol/Drugs" class="form-check-input">
+              <label for="Alcohol/Drugs" class="form-check-label">Alcohol/Drugs &nbsp</label>
+          </div>
+          <div class="col-2">
+              <input type="checkbox" id="heart valve issues" name="heart valve issues" value="heart valve issues" class="form-check-input">
+              <label for="heart valve issues" class="form-check-label">heart valve issues</label><br>
+          </div>
+      </div>
+
+      <div class="row">
+          <div class="col-1">
+              <input type="checkbox" id="mental health" name="mental health" value="mental health" class="form-check-input">
+              <label for="mental health" class="form-check-label">mental health &nbsp</label>
+          </div>
+          <div class="col-1">
+              <input type="checkbox" id="allergies" name="allergies" value="allergies" class="form-check-input">
+              <label for="allergies" class="form-check-label">allergies &nbsp</label>
+          </div>
+          <div class="col-1">
+              <input type="checkbox" id="chronic pain" name="chronic pain" value="chronic pain" class="form-check-input">
+              <label for="chronic pain" class="form-check-label">chronic pain &nbsp</label>
+          </div>
+          <div class="col-1">
+              <input type="checkbox" id="hernia" name="hernia" value="hernia" class="form-check-input">
+              <label for="hernia" class="form-check-label">hernia &nbsp</label>
+          </div>
+          <div class="col-1">
+              <input type="checkbox" id="M.R.S.A" name="M.R.S.A" value="M.R.S.A" class="form-check-input">
+              <label for="M.R.S.A" class="form-check-label">M.R.S.A &nbsp</label>
+          </div>
+          <div class="col-1">
+            <input type="checkbox" id="anemia" name="anemia" value="anemia" class="form-check-input">
+            <label for="anemia" class="form-check-label">anemia &nbsp</label>
+          </div>
+      </div>
+
+      <div class="row">
+        <div class="col-1">
+          <input type="checkbox" id="depression" name="depression" value="depression" class="form-check-input">
+          <label for="depression" class="form-check-label">depression &nbsp</label>
+        </div>
+      <div class="col-1">
+        <input type="checkbox" id="anxiety" name="anxiety" value="anxiety" class="form-check-input">
+        <label for="anxiety" class="form-check-label">anxiety &nbsp</label>
+      </div>
+      <div class="col-1">
+        <input type="checkbox" id="blood pressure" name="blood pressure" value="blood pressure" class="form-check-input">
+        <label for="high blood pressure" class="form-check-label">blood pressure &nbsp</label>
+      </div>
+      <div class="col-1">
+        <input type="checkbox" id="osteoporosis" name="osteoporosis" value="osteoporosis" class="form-check-input">
+        <label for="osteoporosis" class="form-check-label">osteoporosis &nbsp</label>
+      </div>
+      <div class="col-1">
+        <input type="checkbox" id="artery issues" name="artery issues" value="artery issues" class="form-check-input">
+        <label for="artery issues" class="form-check-label">artery issues &nbsp</label>
+      </div>
+      <div class="col-1">
+        <input type="checkbox" id="vein issues" name="vein issues" value="vein issues" class="form-check-input">
+        <label for="vein issues" class="form-check-label">vein issues &nbsp</label>
+      </div>
+      </div>
+      <div class="row">
+        <div class="col-1">
+            <input type="checkbox" id="diabetes" name="diabetes" value="diabetes" class="form-check-input">
+            <label for="diabetes" class="form-check-label">diabetes</label>
+        </div>
+        <div class="col-1">
+          <input type="checkbox" id="high cholesterol" name="high cholesterol" value="high cholesterol" class="form-check-input">
+          <label for="high cholesterol" class="form-check-label">high cholesterol</label>
+        </div>
+        <div class="col-1">
+          <input type="checkbox" id="arthritis" name="arthritis" value="arthritis" class="form-check-input">
+          <label for="arthritis" class="form-check-label">arthritis</label>
+        </div>
+        <div class="col-1">
+          <input type="checkbox" id="skin infection" name="skin infection" value="skin infection" class="form-check-input">
+          <label for="skin infection" class="form-check-label">skin infection</label>
+        </div>
+        <div class="col-1">
+          <input type="checkbox" id="esophagus issues" name="esophagus issues" value="esophagus issues" class="form-check-input">
+          <label for="esophagus issues" class="form-check-label">esophagus issues</label>
+        </div>
+        <div class="col-1">
+          <input type="checkbox" id="ulcers" name="ulcers" value="ulcers" class="form-check-input">
+          <label for="ulcers" class="form-check-label">ulcers</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-1">
+            <input type="checkbox" id="HIV" name="HIV" value="HIV" class="form-check-input">
+            <label for="HIV" class="form-check-label">HIV</label>
+        </div>
+        <div class="col-1">
+          <input type="checkbox" id="UTI" name="UTI" value="UTI" class="form-check-input">
+          <label for="UTI" class="form-check-label">UTI</label>
+        </div>
+        <div class="col-1">
+          <input type="checkbox" id="asthma" name="asthma" value="asthma" class="form-check-input">
+          <label for="asthma" class="form-check-label">asthma</label>
+        </div>
+        <div class="col-1">
+          <input type="checkbox" id="sleep apnea" name="sleep apnea" value="sleep apnea" class="form-check-input">
+          <label for="sleep apnea" class="form-check-label">sleep apnea</label>
+        </div>
+        <div class="col-1">
+          <input type="checkbox" id="fractures" name="fractures" value="fractures" class="form-check-input">
+          <label for="fractures" class="form-check-label">fractures</label>
+        </div>
+        <div class="col-1">
+          <input type="checkbox" id="irritable bowels" name="irritable bowels" value="irritable bowels" class="form-check-input">
+          <label for="irritable bowels" class="form-check-label">irritable bowels</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-1">
+            <input type="checkbox" id="autoimmune disease" name="autoimmune disease" value="autoimmune disease" class="form-check-input">
+            <label for="autoimmune disease" class="form-check-label">autoimmune disease</label>
+        </div>
+        <div class="col-1">
+          <input type="checkbox" id="seizures" name="seizures" value="seizures" class="form-check-input">
+          <label for="aseizures" class="form-check-label">seizures</label>
+        </div>
+        <div class="col-1">
+          <input type="checkbox" id="gallstones" name="gallstones" value="gallstones" class="form-check-input">
+          <label for="gallstones" class="form-check-label">gallstones</label>
+        </div>
+        <div class="col-1">
+          <input type="checkbox" id="kidney disease" name="kidney disease" value="kidney disease" class="form-check-input">
+          <label for="kidney disease" class="form-check-label">kidney disease</label>
+        </div>
+        <div class="col-1">
+          <input type="checkbox" id="STI" name="STI" value="STI" class="form-check-input">
+          <label for="STI" class="form-check-label">STI</label>
+        </div>
+        <div class="col-1">
+          <input type="checkbox" id="thyroid issues" name="thyroid issues" value="thyroid issues" class="form-check-input">
+          <label for="thyroid issues" class="form-check-label">thyroid issues</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-1">
+            <input type="checkbox" id="lung disease" name="lung disease" value="lung disease" class="form-check-input">
+            <label for="lung disease" class="form-check-label">lung disease</label>
+        </div>
+        <div class="col-1">
+          <input type="checkbox" id="headaches" name="headaches" value="headaches" class="form-check-input">
+          <label for="headaches" class="form-check-label">headaches</label>
+        </div>
+        <div class="col-1">
+          <input type="checkbox" id="cancer" name="cancer" value="cancer" class="form-check-input">
+          <label for="cancer" class="form-check-label">cancer</label>
+        </div>
+        <div class="col-1">
+          <input type="checkbox" id="tubercolosis" name="tubercolosis" value="tubercolosis" class="form-check-input">
+          <label for="tubercolosis" class="form-check-label">tubercolosis</label>
+        </div>
+        <div class="col-1">
+          <input type="checkbox" id="blood clots" name="blood clots" value="blood clots" class="form-check-input">
+          <label for="blood clots" class="form-check-label">blood clots</label>
+        </div>
+        <div class="col-1">
+          <input type="checkbox" id="stroke" name="stroke" value="stroke" class="form-check-input">
+          <label for="stroke" class="form-check-label">stroke</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-1">
+            <input type="checkbox" id="gout" name="gout" value="gout" class="form-check-input">
+            <label for="gout" class="form-check-label">gout</label>
+        </div>
+        <div class="col-1">
+          <input type="checkbox" id="liver disease" name="liver disease" value="liver disease" class="form-check-input">
+          <label for="liver disease" class="form-check-label">liver disease</label>
+        </div>
+        <div class="col-1">
+          <input type="checkbox" id="hepatitis" name="hepatitis" value="hepatitis" class="form-check-input">
+          <label for="hepatitis" class="form-check-label">hepatitis</label>
+        </div>
+        <div class="col-1">
+          <input type="checkbox" id="glaucoma" name="glaucoma" value="glaucoma" class="form-check-input">
+          <label for="glaucoma" class="form-check-label">glaucoma</label>
+        </div>
+        <div class="col-1">
+          <input type="checkbox" id="bleeding" name="bleeding" value="bleeding" class="form-check-input">
+          <label for="bleeding" class="form-check-label">bleeding</label>
+        </div>
+      </div>
+    </div>
+    <div><br>
+    
+    <p>Please check any of boxes below if you have had these surgeries in the past.</p>
+    
+    <div>
+      <div class="row">
+        <label for="medication">Are you taking any medication? If so, list them below.</label><br>
+        <div class="col-1">
+          <input type="text" id="medication" name="medication" value="" placeholder="medication 1" class="form-control" style="width: 200px;">
+        </div>
+        <div class="col-1">
+          <input type="text" id="medication" name="medication" value="" placeholder="medication 2" class="form-control" style="width: 200px;">
+        </div>
+        <div class="col-1">
+          <input type="text" id="medication" name="medication" value="" placeholder="medication 3" class="form-control" style="width: 200px;">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-1">
+          <input type="text" id="medication" name="medication" value="" placeholder="medication 4" class="form-control" style="width: 200px;">
+        </div>
+        <div class="col-1">
+          <input type="text" id="medication" name="medication" value="" placeholder="medication 5" class="form-control" style="width: 200px;">
+        </div>
+        <div class="col-1">
+          <input type="text" id="medication" name="medication" value="" placeholder="medication 6" class="form-control" style="width: 200px;">
+        </div>
+      </div>
+    </div>
+  </form>
 </body>
