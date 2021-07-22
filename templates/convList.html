@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Healtcare</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/style.css') }}">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='js/script.js') }}">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='bootstrap-5.0.2-dist/css/bootstrap.css') }}">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='bootstrap-5.0.2-dist/js/bootstrap.js') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  </head>
+{% extends "index.html"%}
+{% block content %}
+
+<body>
+  <table class="table table-dark" border="1" style="width: 100%; margin-top: 20px; text-align: center;">
+    <thead>
+      <tr>
+        <th scope="col">Message ID</th>
+        <th scope="col">Recipiant Name</th>
+        <th scope="col">Subject</th>
+        <th scope="col">Message</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for message in all_conv %}
+      <tr>
+        <td>{{message.mID}}</td>
+        <td>{{message.rName}}</td>
+        <td>{{message.subj}}</td>
+        <td>{{message.mes}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+
+  </table>
+
+  {% endblock %}
+</body>

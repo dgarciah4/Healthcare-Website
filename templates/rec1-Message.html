@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Healtchare</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/style.css') }}">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='js/script.js') }}">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='bootstrap-5.0.2-dist/css/bootstrap.css') }}">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='bootstrap-5.0.2-dist/js/bootstrap.js') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  </head>
+
+  <body class="siteBackground">
+    {% extends "index.html"%}
+    {% block content %}
+    <div class="message-display">
+      <div class="container-fluid">
+
+      <div class="mheader">
+        <h1><p> Michael Scott </p></h1>
+        <h2> <b>Department: </b> Anesthesiology </h2>
+      </div>
+      <br>
+
+    <div class="text-box">
+
+      <div class="commentBox">
+        Comment: <input type="text" id="comment"></input> <br><br>
+      </div>
+
+      <div class="postButtons">
+        <button type="button" class="btn btn-primary btn-lg" id="addCommentButton"
+        value="Add Comment" onclick="addComment();">Add Comment</button>
+        <button type="button" class="btn btn-secondary btn-lg" id="displayCommentButton"
+        value="Display Comments" onclick="displayComments();">Display Comment</button>
+      </div>
+
+
+    <p id= "Result"></p>
+    <script type="text/javascript">
+      var index = 0;
+      var comments = Array();
+      function addComment()
+      {
+        comments[index] = document.getElementById("comment").value;
+        alert("Your Comment: " + comment[index] + "Added at index " + index);
+        index++;
+        document.getElementById("comment").value = "";
+      }
+      function displayComments()
+      {
+          var e = "<hr/>";
+          for (var i=0; i<comments.length; i++)
+          {
+            e += "Comment # " + i + " = " + comments[i] + "<br/>";
+          }
+          document.getElementById("Result").innerHTML = e;
+      }
+    </script>
+  </div>
+
+  {% endblock %}
+
+</body>
+</html>
