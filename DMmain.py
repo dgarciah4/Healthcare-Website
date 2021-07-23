@@ -23,14 +23,15 @@ class Employee(db.Model):
     __tablename__="employee"
     eID = db.Column(db.Text, primary_key=True)
     name = db.Column(db.Text)
-    pos = db.column(db.Text) ##position
-    dpt = db.Column(db.Text) ##department
+    pos = db.Column(db.Text) ## position
+    dpt = db.Column(db.Text) ## department
 
     def __init__(self, eID, name, pos, dpt):
         self.eID  = eID
         self.name = name
-        self.dpt  = dpt
         self.pos  = pos
+        self.dpt  = dpt
+
 
 ## Create a Model for Messages
 class Message(db.Model):
@@ -65,6 +66,7 @@ def employeeForm ():
         idsuffix = random.randint(1111,9999)
         idprefix = "HC"
         eID = idprefix + str(idsuffix)
+
         name = eData["name"]
         pos = eData["pos"]
         dpt = eData["dpt"]
@@ -121,11 +123,6 @@ def rec1Message ():
 def list_all ():
     all_employees = Employee.query.all()
     return render_template ('employeeList.html',all_employees = all_employees)
-
-@app.route('/employeeList', methods = ['POST', 'GET'])
-def employeeList ():
-
-    return render_template('employeeList.html')
 
 @app.route('/convList', methods = ['POST', 'GET'])
 def results ():

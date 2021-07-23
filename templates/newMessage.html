@@ -55,11 +55,8 @@
       <form action="./newMessage"class="form-inline" method="POST">
 
         <label for="exampleFormControlSelect1">Recipiant Name</label>
-            <select class="form-control" name="rName"id="exampleFormControlSelect1">
-            {% for employee in all_employees %}
-              <option>{{employee.name}}</option>
-            {% endfor %}
-            </select>
+        <input type="text" name="rName" class="form-control" id="formGroupExampleInput" placeholder="Recipiant Name">
+
         <label for="formGroupExampleInput"> Subject </label>
         <br>
         <input type="text" name="subj" class="form-control" id="formGroupExampleInput" placeholder="Subject">
@@ -74,7 +71,7 @@
     <br>
     <div class="emList">
       <form action="" class="buttons" methods="get">
-        <button type="submit" class="btn btn-info"> <a href="{{url_for('employeeList')}}">List All</a></button>
+        <button type="submit" class="btn btn-info"> <a href="{{url_for('list_all')}}">Directory</a></button>
       </form>
     </div>
 
