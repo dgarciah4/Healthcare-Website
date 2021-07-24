@@ -12,13 +12,14 @@
   </head>
 
   <body class="siteBackground">
-    {% extends "index.html"%}
+    {% include "messaging.html"%}
+
     {% block content %}
     <div class="message-display">
       <div class="container-fluid">
 
       <div class="mheader">
-        <h1><p> Michael Scott </p></h1>
+        <h1><p> <Michael Scott> </p></h1>
         <h2> <b>Department: </b> Anesthesiology </h2>
       </div>
       <br>
@@ -26,12 +27,14 @@
     <div class="text-box">
 
       <div class="commentBox">
-        Comment: <input type="text" id="comment"></input> <br><br>
+        Message
+        <textarea class="form-control" name="mes" id="comment" rows="3"></textarea>
       </div>
-
+      <br>
       <div class="postButtons">
         <button type="button" class="btn btn-primary btn-lg" id="addCommentButton"
-        value="Add Comment" onclick="addComment();">Add Comment</button>
+        value="Add Comment" onclick="addComment();">Send</button>
+        <br>
         <button type="button" class="btn btn-secondary btn-lg" id="displayCommentButton"
         value="Display Comments" onclick="displayComments();">Display Comment</button>
       </div>

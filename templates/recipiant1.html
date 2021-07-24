@@ -29,35 +29,30 @@
         <table>
 
             <tr>
-              <th> Contact</th>
+              <th>Contact</th>
               <th>Subject</th>
               <th>Message</th>
             </tr>
             <tr>
-             <td>
-               <button type="button" name="button">
-                 <a href="{{url_for('rec1Message')}}">
-                   {{employee.nameF}} {{employee.nameL}}
+              {% for message in all_messages %}
+              <td>
+                <a href="{{url_for('rec1Message')}}">
+                  {{message.rName}}
                 </a>
-              </button>
-            </td>
+              </td>
+              <td>{{message.rName}}</td>
               <td>{{message.subj}}</td>
-              <td> {{message.mes}}</td>
-
+              <td>{{message.mes}}</td>
             </tr>
 
-            <tr>
-              <td>{{employee.nameF}}</td>
-              <td>{{message.subj}}</td>
-              <td> ((message.mes))</td>
-            </tr>
 
+          {% endfor %}
 
         </table>
 
       </div>
       </div>
-      {% endblock %}
+    {% endblock %}
 
     </body>
 </html>

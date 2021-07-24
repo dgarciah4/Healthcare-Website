@@ -16,23 +16,45 @@
 {% extends "index.html"%}
 {% block content %}
 
-
+  <div class="outterBox">
     <div class="upper-header">
       <h1> Secure Messages</h1>
       ______________________________________________
     </div>
     <br>
-
     <div class="messages-layout">
 
     <div class="container-fluid">
-      <div class="overContactList">
+
       <header class="header">
         <!-- NEW MESSAGE -->
         <button type="button" class="btn btn-info"> <a href="{{url_for('newMessage')}}"> New Message </a></button>
 
       </header>
+      <div class="MessageBox" method="POST">
+        <table>
 
+            <tr>
+              <th>Contact</th>
+              <th>Subject</th>
+            </tr>
+            <tr>
+              {% for message in all_messages %}
+              <td>
+                <a href="{{url_for('rec1Message')}}">
+                  {{message.rName}}
+                </a>
+              </td>
+              <td>{{message.subj}}</td>
+            </tr>
+
+
+          {% endfor %}
+
+        </table>
+      </div>
+
+      <!--  
       <section class="contact-lib">
         <div class="container-fluid">
           <table class="table" border="1" style="width: 100%; margin-top: 20px; text-align: center;">
@@ -41,7 +63,7 @@
                 <th scope="col">Contacts</th>
               </tr>
             </thead>
-            <!--List of Contact Appears -->
+          <!--  List of Contacts Appears  
             <tr>
                 <td>
                 <a href="{{url_for('recipiant1')}}">
@@ -76,7 +98,8 @@
 
       </table>
       </section>
-      </div>
+            -->
+
       <!-- TURN THIS TO A FLASK CALL -->
       <div class="message-box" id="messageContent">
         <iframe class="messPanel" id="commContent" scrolling="no" width="100%" height="100%"></iframe>
@@ -89,6 +112,7 @@
   </div>
 
 
+</div>
 </div>
 {% endblock %}
 

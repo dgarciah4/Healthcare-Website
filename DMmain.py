@@ -26,6 +26,7 @@ class Employee(db.Model):
     pos = db.Column(db.Text) ## position
     dpt = db.Column(db.Text) ## department
 
+
     def __init__(self, eID, name, pos, dpt):
         self.eID  = eID
         self.name = name
@@ -55,7 +56,10 @@ def home ():
 
 @app.route('/messaging', methods = ["POST", "GET"])
 def messaging ():
-    return render_template ('messaging.html')
+
+    all_messages = Message. query.all()
+
+    return render_template ('messaging.html',all_messages=all_messages)
 
 @app.route('/employeeForm', methods = ["POST", "GET"])
 def employeeForm ():
@@ -96,27 +100,27 @@ def newMessage ():
         new_data = Message(mID, rName, subj, mes)
         db.session.add(new_data)
         db.session.commit()
-        all_conv = Message.query.all()
-        return render_template('convList.html', all_conv = all_conv)
+        all_messages = Message.query.all()
+        return render_template('messaging.html', all_messages = all_messages)
     return render_template ('newMessage.html')
 
 
 
 @app.route('/recipiant1', methods = ["POST", "GET"])
 def recipiant1 ():
-    return render_template ('recipiant1.html')
+    all_employees = Employee.query.all()
+    all_messages = Message. query.all()
+    return render_template ('recipiant1.html',all_employees=all_employees, all_messages=all_messages)
 
-@app.route('/recipiant2', methods = ["POST", "GET"])
-def recipiant2 ():
-    return render_template ('recipiant2.html')
-
-@app.route('/recipiant3', methods = ["POST", "GET"])
-def recipiant3 ():
-    return render_template ('recipiant3.html')
 
 @app.route('/rec1-Message', methods = ["POST", "GET"])
 def rec1Message ():
-    return render_template ('rec1-Message.html')
+    if request.method == "POST":
+        select_recipiant =request.form.get("message.rName")
+        Message.query.filter(Message.rName == select_recipiant)
+        db.session.commit()
+    all_messages = Message.query.all()
+    return render_template ('rec1-Message.html',all_messages = all_messages)
 
 ## List All Employees
 @app.route('/list_all', methods = ['POST', 'GET'])
@@ -132,6 +136,14 @@ def results ():
 
 
 
+
+@app.route('/recipiant2', methods = ["POST", "GET"])
+def recipiant2 ():
+    return render_template ('recipiant2.html')
+
+@app.route('/recipiant3', methods = ["POST", "GET"])
+def recipiant3 ():
+    return render_template ('recipiant3.html')
 
 
 

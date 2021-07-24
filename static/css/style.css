@@ -196,6 +196,11 @@ body {
 
 /* //////////////////////////////////////////////////////// */
 /* Messaging Pages */
+.outterBox {
+  width: 100%;
+  height: 100%;
+}
+
 .contact-lib {
   width: 100%;
 }
@@ -209,9 +214,9 @@ body {
 }
 
 .overContactList {
-    width: 25%;
+    width: 100%
     float: left;
-    border: 5px solid #dddddd;
+    border: 10px solid #dddddd;
     height: 100%;
 }
 
@@ -301,7 +306,7 @@ tr:nth-child(even) {
 }
 
 .postButtons {
-  float: right;
+  float: left;
 
   width: 70%;
 }
