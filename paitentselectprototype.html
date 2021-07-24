@@ -12,7 +12,7 @@
       
     </script>
   </head>
-  <body style = "background: White">
+  <body style = "background: LightGray">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Navbar</a>
@@ -30,28 +30,30 @@
   </div>
 </nav>
 <h1> Patient Select</h1>
-<input class="form-control" type="text"  aria-label="patient" placeholder = "Patient information" >
+<form action="" method="post">
+<input class="form-control" type="text"  aria-label="patient" placeholder = "Patient information" name="search" >
 <br>
-<input class="btn btn-primary" type="submit" value="Search">
 
 <div class="form-check">
-  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+  <input class="form-check-input" type="checkbox" value="name" id="flexCheckDefault">
   <label class="form-check-label" for="flexCheckDefault">
     Name
   </label>
 </div>
 <div class="form-check">
-  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" >
+  <input class="form-check-input" type="checkbox" value="dob" id="flexCheckChecked" >
   <label class="form-check-label" for="flexCheckChecked">
     Date of Birth
   </label>
 </div>
 <div class="form-check">
-  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" >
+  <input class="form-check-input" type="checkbox" value="gender" id="flexCheckChecked" >
   <label class="form-check-label" for="flexCheckChecked">
     Gender
   </label>
 </div>
+<input class="btn btn-primary" type="submit" value="Search">
+</form>
 <br>
 <table class="table caption-top">
   <caption>List of paitents</caption>
@@ -65,27 +67,15 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>1-23-84</td>
-      <td>Male</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jackie</td>
-      <td>Thornton</td>
-      <td>12-13-93</td>
-      <td>Female</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>Birming</td>
-      <td>4-1-00</td>
-      <td>Male</td>
-    </tr>
+    {% for paitent in paitents %}
+               <tr>
+                  <td>{{ paitent.id }}</td>
+                  <td>{{ paitent.firstname }}</td>
+                  <td>{{ paitent.lastname }}</td>
+                  <td>{{ paitent.dob }}</td>
+                  <td>{{ paitent.gender }}</td>
+               </tr>
+     {% endfor %}
   </tbody>
 </table>
   </body>
