@@ -1,7 +1,115 @@
+var main = function () {
+
+    //On page load, look for session cookie, and verify its authenticity
+    //If there IS a session cookie, and its bad, set the login message to session expired
+    //Note that we assume only one cookie for this domain
+    let sessionId = document.cookie.split(';')[0].split("=")[1];
+
+    //No sessionId
+    if(sessionId == null) {
+        $("#showLoginModalButton").click();
+    } else {
+
+        //We have a session ID, validate it with the introspect
+        var results = $.ajax({
+            url: "/introspect?sessionId=" + sessionId,
+            async: false
+        }).responseText;
+
+        if(results == null){
+            $("#loginMessage").innerText = "";
+            $("#showLoginModalButton").click();
+        } else {
+            $("#dismissLoginModalButton").click();
+        }
+
+    }
+
+    document.getElementById("loginSubmitButton").onclick = submitLogin;
+
+    function submitLogin() {
+
+        let username = document.getElementById("usernameInput").value;
+        let password = document.getElementById("passwordInput").value;
+
+        var sessionIdRet = $.ajax({
+            url: "/login?username=" + username + "&password=" + password,
+            async: false
+        }).responseText;
+
+        if(sessionIdRet != null) {
+
+            //Successful login ... set session ID and clean up
+            document.cookie = "sessionId="+sessionIdRet+"; Path=/; Expires=Sat, 31 Dec 2050 00:00:01 GMT;"
+            document.getElementById("usernameInput").value = "";
+            document.getElementById("passwordInput").value = "";
+            $("#dismissLoginModalButton").click();
+            $("#loginMessage").innerText = "";
+
+            //document.cookie.split(';')[0].split("=")[1]
+        } else {
+            $("#loginMessage").innerText = "Invalid login";
+
+        }
+
+    };
+
+    function getCurrentLoginForNavPanel(){
+
+        var sessionId = document.cookie.split(';')[0].split("=")[1];
+
+        var userDetails = $.ajax({
+            url: "/getUserDetails?sessionId=" + sessionId,
+            async: false
+        }).responseText;
+
+        document.getElementById("navPanelUserWelcome").innerHTML = "Welcome " + userDetails.properName;
+        document.getElementById("navPanelPicture").src = userDetails.image;
+
+
+    }
+
+}
+
+/*
+$(function submitLogin() {
+
+    let username = document.getElementById("usernameInput").value;
+    let password = document.getElementById("passwordInput").value;
+    alert("WHY DID THIS CLICK?");
+
+    $.getJSON("/login?username=" + username + "&password=" + password, function (sessionId) {
+
+        alert("WHY DID THIS CLICK?asdasdasd");
+
+        if(sessionId != null) {
+
+            //Successful login ... set session ID and clean up
+            document.cookie = "sessionId="+sessionId+"; Path=/; Expires=Sat, 31 Dec 2050 00:00:01 GMT;"
+            $("#usernameInput").value("");
+            $("#passwordInput").value("");
+            $("#dismissLoginModalButton").click();
+            $("#loginMessage").innerText = "";
+
+            //document.cookie.split(';')[0].split("=")[1]
+        } else {
+            $("#loginMessage").innerText = "Invalid login";
+
+        }
+
+
+    });
+
+    alert("WHYK?");
+
+});*/
+
+$(document).ready(main);
+
 
 var sectionList = ["mainPage","resume","contact","portfolio"];
 
-var myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {});
+//var myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {});
 
 function navigateClaims(insuranceId){
 
