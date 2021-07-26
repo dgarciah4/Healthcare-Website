@@ -1,5 +1,24 @@
+.navPanelWrapper{
+
+    height: auto;
+    width: 200px;
+}
+
+.navPanelImage {
+
+    height: 150px;
+    width: 100%;
+}
+
+.paddingTop{
+    padding-top: 7px;
+}
+
 body {
-    overflow:hidden;
+}
+
+.redText {
+    color: red;
 }
 
 .completeWrapper{

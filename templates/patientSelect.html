@@ -2,78 +2,45 @@
 {% extends "index.html" %}
 
 {% block content %}
-    <div class="">
-      <div class="row justify-content-md-center">
-        <div class="col-2 h5">
-          Type
-        </div>
-        <div class="col-3 h5">
-          Provider
-        </div>
-        <div class="col-4 h5">
-          Group/family
-        </div>
-        <div class="col-3 h5">
 
-        </div>
+<BR><BR>
+<form target="_self" action="patientSearchCriteria" method="post">
+<div class="row">
+  <div class="col-4">
+
+
+      <div class=" form-floating mb-3">
+        <input id="searchText" name="searchText" type="text" class="form-control" placeholder="searchText">
+        <label for="searchText">Patient Search Text</label>
       </div>
 
 
-      {%for thisInsurance in insurances %}
+  </div>
+  <div class="col-2 paddingTop ">
+      <button id="searchButton" type="submit" class="paddingTop btn btn-primary">Search</button>
+  </div>
+</div>
 
-      <div class="row justify-content-md-center" >
+</form>
 
-        <div class="col-2">
-          <p class="fs-6">{{thisInsurance[0]}}</p>
-        </div>
-        <div class="col-3">
-          <p class="fs-6">{{thisInsurance[1]}}</p>
-        </div>
-        <div class="col-4">
-          <p class="fs-6 text-truncate">{{thisInsurance[2]}}</p>
-        </div>
-        <div class="col-3">
-          <!--<button type="su" class="btn btn-primary btn-sm">Edit</button>-->
-          <button type="button" class="btn btn-primary btn-sm" >Remove</button>
-          <button id="claims1button" onclick="navigateClaims(1)" type="button" class="btn btn-primary btn-sm">Claims</button>
-        </div>
 
-      </div>
+        {%for thisPatient in searchResults %}
 
-      {% endfor %}
+        <div class="row " >
+          <div class="col-4 paddingTop">
+            <form target="_self" action="patientSelectSubmit" method="post">
+              <input type="hidden" value="{{thisPatient[0]}}" name="patientId"/>
 
-      <BR><BR><BR><b>Add new insurance:</b><BR><BR>
+              <button id="{{thisPatient[1]}}" type="submit" class="paddingTop btn btn-primary">{{thisPatient[1]}}</button>
 
-      <form action="insuranceAdd" method="post" target="_self">
-      <div class="row justify-content-md-center hiddenSection" id="asd">
-        <div class="col-2">
-          <div class=" form-floating mb-3">
-            <input name="addType" id="addType" type="text" class="form-control" placeholder="Type">
-            <label for="addType">Type</label>
+            </form>
+
           </div>
         </div>
-        <div class="col-3">
-          <div class=" form-floating mb-3">
-            <input name="addProvider" id="addProvider" type="text" class="form-control" placeholder="Provider">
-            <label for="addProvider">Provider</label>
-          </div>
-        </div>
-        <div class="col-4">
-          <div class=" form-floating mb-3">
-            <input name="addGroup" id="addGroup" type="text" class="form-control" placeholder="Group or Family">
-            <label for="addGroup">Group or Family</label>
-          </div>
-        </div>
-        <div class="col-3 paddingTop">
-          <button type="submit" class="btn btn-primary btn-sm">Add Insurance</button>
-          <button onclick="insuranceAddClearButtonClick()" type="button" class="btn btn-primary btn-sm">Clear</button>
-        </div>
-      </div>
-      </form>
-    </div>
+
+        {% endfor %}
 
 <!--
-
       <div class="row justify-content-md-center" id="insurance1div">
         <div class="col-2">
           <p class="fs-6">Dental</p>

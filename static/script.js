@@ -11,16 +11,18 @@ var main = function () {
     } else {
 
         //We have a session ID, validate it with the introspect
-        var results = $.ajax({
-            url: "/introspect?sessionId=" + sessionId,
+        let results = $.ajax({
+            url: "/introspect",
             async: false
         }).responseText;
 
-        if(results == null){
-            $("#loginMessage").innerText = "";
+        if(results != "GOOD"){
+            $("#loginMessage").empty();
             $("#showLoginModalButton").click();
+            document.cookie = "";
         } else {
             $("#dismissLoginModalButton").click();
+            populateNavPanel();
         }
 
     }
@@ -37,74 +39,53 @@ var main = function () {
             async: false
         }).responseText;
 
-        if(sessionIdRet != null) {
+        if(sessionIdRet != null && sessionIdRet != "") {
 
             //Successful login ... set session ID and clean up
             document.cookie = "sessionId="+sessionIdRet+"; Path=/; Expires=Sat, 31 Dec 2050 00:00:01 GMT;"
             document.getElementById("usernameInput").value = "";
             document.getElementById("passwordInput").value = "";
             $("#dismissLoginModalButton").click();
-            $("#loginMessage").innerText = "";
+            $("#loginMessage").empty();
+            populateNavPanel();
 
             //document.cookie.split(';')[0].split("=")[1]
         } else {
-            $("#loginMessage").innerText = "Invalid login";
+            $("#loginMessage").empty();
+            var newdiv1 = $( "<div id='loginMessageText' class='redText' >Invalid login</div>" );
+            $("#loginMessage").append(newdiv1);
 
         }
 
     };
 
-    function getCurrentLoginForNavPanel(){
+    function populateNavPanel(){
 
-        var sessionId = document.cookie.split(';')[0].split("=")[1];
-
-        var userDetails = $.ajax({
-            url: "/getUserDetails?sessionId=" + sessionId,
+        var welcomeMessage = $.ajax({
+            url: "/getWelcomeMessage",
             async: false
         }).responseText;
 
-        document.getElementById("navPanelUserWelcome").innerHTML = "Welcome " + userDetails.properName;
-        document.getElementById("navPanelPicture").src = userDetails.image;
+        if(welcomeMessage != "Select Patient To Proceed"){
+            document.getElementById("insuranceButton").classList.remove("disabled");
+            document.getElementById("claimsButton").classList.remove("disabled");
+            document.getElementById("ordersButton").classList.remove("disabled");
+            document.getElementById("patientHistoryButton").classList.remove("disabled");
+        }
+
+        document.getElementById("navPanelUserWelcome").innerHTML = welcomeMessage;
+
 
 
     }
 
+
 }
 
-/*
-$(function submitLogin() {
-
-    let username = document.getElementById("usernameInput").value;
-    let password = document.getElementById("passwordInput").value;
-    alert("WHY DID THIS CLICK?");
-
-    $.getJSON("/login?username=" + username + "&password=" + password, function (sessionId) {
-
-        alert("WHY DID THIS CLICK?asdasdasd");
-
-        if(sessionId != null) {
-
-            //Successful login ... set session ID and clean up
-            document.cookie = "sessionId="+sessionId+"; Path=/; Expires=Sat, 31 Dec 2050 00:00:01 GMT;"
-            $("#usernameInput").value("");
-            $("#passwordInput").value("");
-            $("#dismissLoginModalButton").click();
-            $("#loginMessage").innerText = "";
-
-            //document.cookie.split(';')[0].split("=")[1]
-        } else {
-            $("#loginMessage").innerText = "Invalid login";
-
-        }
-
-
-    });
-
-    alert("WHYK?");
-
-});*/
-
 $(document).ready(main);
+
+
+
 
 
 var sectionList = ["mainPage","resume","contact","portfolio"];
