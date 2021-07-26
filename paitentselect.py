@@ -35,7 +35,8 @@ class Paitent(db.Model):
 
 @app.route('/', methods = ['GET','POST'])
 def index():
-    search = request.form['search']
+    
+    search = request.form.get('search', False)
     if request.method == 'POST':
         option = request.form['option']
         if option == "name":
@@ -44,37 +45,41 @@ def index():
             return indexdob(search)
         elif option == "gender":
         	return indexgender(search)
+        elif option == None:
+        	return indexsearch(search)
         else:
             return indexsearch(search)
 
-    return render_template('paitentselectprototype.html', paitent = Paitent.query.all())
+    return render_template('paitentselectprototype.html', paitents = Paitent.query.all())
     
 @app.route('/name', methods = ['GET','POST'])
 def indexname(search):
-    return render_template('paitentselectprototype.html', paitent = Paitent.query.filter(Paitent.firstname+Paitent.lastname == search ))
+    return render_template('paitentselectprototype.html', paitents = Paitent.query.filter(search == Paitent.firstname or search == Paitent.lastname ))
         
         
     return render_template('paitentselectprototype.html')
 
 @app.route('/dob', methods = ['GET','POST'])
 def indexdob(search):
-        return render_template('paitentselectprototype.html', paitent = Paitent.query.filter(Paitent.dob == search ))
+        return render_template('paitentselectprototype.html', paitents = Paitent.query.filter(Paitent.dob == search ))
     
 
 @app.route('/gender', methods = ['GET','POST'])
 def indexgender(search):
-        return render_template('paitentselectprototype.html', paitent = Paitent.query.filter(Paitent.gender == search ))
+        return render_template('paitentselectprototype.html', paitents = Paitent.query.filter(Paitent.gender == search ))
 @app.route('/search', methods = ['GET','POST'])
 def indexsearch(search):
-        return render_template('paitentselectprototype.html', paitent = Paitent.query.filter(Paitent.gender == search or Paitent.dob == search or Paitent.firstname+Paitent.lastname == search  ))
+        return render_template('paitentselectprototype.html', paitents = Paitent.query.filter(Paitent.gender == search or Paitent.dob == search or Paitent.firstname+Paitent.lastname == search  ))
 
 
 if __name__ == '__main__':
 	db.create_all()
-	app.run(debug = False)
-	"""mahmut = Paitent('Mahmut', 'Unan', '5-07-85', 'Male')
+	
+	mahmut = Paitent('Mahmut', 'Unan', '5-07-85', 'Male')
 	sam = Paitent('Sam', 'Wick', '10-01-63', 'Female')
 	carrie = Paitent('Carrie', 'Jones', '02-25-03', 'Female')
 	db.session.add_all([mahmut,sam, carrie])
-	db.session.commit()"""
+	db.session.commit()
+	
+	app.run(debug = True)
 
