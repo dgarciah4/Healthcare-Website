@@ -14,5 +14,9 @@ db.session.add_all([mahmut,sam, carrie])
 
 db.session.commit()
 
+print(sam.dob)
+print(mahmut.lastname)
+print(carrie.gender)
+
 all_students = Paitent.query.all()
 print(all_students)

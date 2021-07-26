@@ -13,7 +13,7 @@ app.config['SQLAlchemy_TRAC_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'oursecretkey'
 
 db=SQLAlchemy(app)
-#Migrate(app,db)
+Migrate(app,db)
 
 class Paitent(db.Model):
 	__tablename__="paitent"
@@ -35,7 +35,7 @@ class Paitent(db.Model):
 
 @app.route('/', methods = ['GET','POST'])
 def index():
-    search = request.form
+    search = request.form['search']
     if request.method == 'POST':
         option = request.form['option']
         if option == "name":
@@ -71,5 +71,10 @@ def indexsearch(search):
 
 if __name__ == '__main__':
 	db.create_all()
-	app.run(debug = True)
+	app.run(debug = False)
+	"""mahmut = Paitent('Mahmut', 'Unan', '5-07-85', 'Male')
+	sam = Paitent('Sam', 'Wick', '10-01-63', 'Female')
+	carrie = Paitent('Carrie', 'Jones', '02-25-03', 'Female')
+	db.session.add_all([mahmut,sam, carrie])
+	db.session.commit()"""
 

@@ -31,23 +31,29 @@
 </nav>
 <h1> Patient Select</h1>
 <form action="" method="post">
-<input class="form-control" type="text"  aria-label="patient" placeholder = "Patient information" name="searchbar" >
+<input class="form-control" type="text"  aria-label="patient" placeholder = "Patient information" name="search" >
 <br>
-
+<h4> Select one</h4>
 <div class="form-check">
-  <input class="form-check-input" type="checkbox" value="name" id="flexCheckDefault">
+  <input class="form-check-input" type="checkbox" value="none" id="flexCheckDefault" name="option">
+  <label class="form-check-label" for="flexCheckDefault">
+    None
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" value="name" id="flexCheckDefault" name="option">
   <label class="form-check-label" for="flexCheckDefault">
     Name
   </label>
 </div>
 <div class="form-check">
-  <input class="form-check-input" type="checkbox" value="dob" id="flexCheckChecked" >
+  <input class="form-check-input" type="checkbox" value="dob" id="flexCheckChecked" name="option">
   <label class="form-check-label" for="flexCheckChecked">
     Date of Birth
   </label>
 </div>
 <div class="form-check">
-  <input class="form-check-input" type="checkbox" value="gender" id="flexCheckChecked" >
+  <input class="form-check-input" type="checkbox" value="gender" id="flexCheckChecked" name="option">
   <label class="form-check-label" for="flexCheckChecked">
     Gender
   </label>
