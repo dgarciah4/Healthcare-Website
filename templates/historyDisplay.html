@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Insurance wireframe</title>
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/style.css') }}">
+        <link rel= "stylesheet" type= "text/javascript" href= "{{ url_for('static',filename='js/script.js') }}">
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='bootstrap-5.0.2-dist/css/bootstrap.css') }}">
+        <link rel= "stylesheet" type= "text/javascript" href= "{{ url_for('static',filename='bootstrap-5.0.2-dist/js/bootstrap.js') }}">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
+    <body class="siteBackground">
+        {% for element in items %}
+        <div class="form-group" style="display: flex;">
+            <p>First Name: {{element[0]}} &nbsp &nbsp &nbsp</p>
+            <p>Middle Name: {{element[1]}} &nbsp &nbsp &nbsp</p>
+            <p>Last Name: {{element[2]}} &nbsp &nbsp &nbsp</p>
+          </div>
+      
+          <div class="form-inline">
+            <div class="form-group" style="display: flex;">
+              <p>Address: {{element[3]}} &nbsp &nbsp &nbsp</p>
+              <p>City: {{element[4]}} &nbsp &nbsp &nbsp</p>
+              <p>State: {{element[5]}} &nbsp &nbsp &nbsp</p>
+              <p>Zip: {{element[6]}} &nbsp &nbsp &nbsp</p>
+            </div>
+          </div><br>
+      
+          <div class="form-inline">
+            <div class="form-group" style="display: flex;">
+                <p>Phone (H): {{element[7]}} &nbsp &nbsp &nbsp</p>
+                <p>Phone (C/W): {{element[8]}} &nbsp &nbsp &nbsp</p>
+                <p>DOB: {{element[9]}} &nbsp &nbsp &nbsp</p>
+                <p>SS#: {{element[10]}} &nbsp &nbsp &nbsp</p>
+            </div>
+          </div><br>
+      
+          <div class="form-inline">
+            <div class="form-group" style="display: flex;">
+                <p>Occupation: {{element[11]}} &nbsp &nbsp &nbsp</p>
+                <p>Employer: {{element[12]}} &nbsp &nbsp &nbsp</p>
+                <p>Email: {{element[13]}} &nbsp &nbsp &nbsp</p>
+            </div><br>
+            <div class="form-inline">
+              <div class="form-group" style="display: flex;">
+                <p>Insurance Provider: {{element[14]}} &nbsp &nbsp &nbsp</p>
+              </div><br>
+            </div>
+            <p>What is your sexual orientation?</p>
+            <div class="row">
+              <div class="col-1">
+                <p>{{element[15]}} &nbsp &nbsp &nbsp</p>
+              </div>
+            </div><br>
+            <p>What is your current relationship status?</p>
+            <div class="row">
+              <div class="col-1">
+                <p>{{element[16]}} &nbsp &nbsp &nbsp</p>
+              </div>
+            </div><br>
+          </div>
+              <p>Have you ever visited us before?</p>
+              <div>
+                <div class="row">
+                  <div class="col-1">
+                    <p>{{element[17]}} &nbsp &nbsp &nbsp</p>
+                  </div>
+                </div>
+              </div>
+          </div><br>
+      
+         <div class="form-inline">
+           <div class="form-group" style="display: flex;">
+            <p>You're last visit with us:</p><br>
+            <p>&nbsp &nbsp {{element[18]}} &nbsp &nbsp &nbsp</p>
+           </div>
+         </div><br>
+      
+          <p><u>Health History:</u></p>
+      
+          <h2>Your Health Conditions and Medications</h2>
+          <div>
+          <div class="row">
+            <p>Your ailments and conditions:</p>
+            <p>&nbsp &nbsp {{element[19]}} &nbsp &nbsp &nbsp</p>
+          </div>
+          
+          <div>
+            <div class="row">
+                <p>The medications you are taking:</p>
+                <p>&nbsp &nbsp {{element[20]}} &nbsp &nbsp &nbsp</p>
+            </div>
+          </div>
+          <br>
+          {% endfor %}
+    </body>
+</html>

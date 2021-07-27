@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Insurance wireframe</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/style.css') }}">
+    <link rel= "stylesheet" type= "text/javascript" href= "{{ url_for('static',filename='js/script.js') }}">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='bootstrap-5.0.2-dist/css/bootstrap.css') }}">
+    <link rel= "stylesheet" type= "text/javascript" href= "{{ url_for('static',filename='bootstrap-5.0.2-dist/js/bootstrap.js') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+  
+  <body class="siteBackground">
+
+
+
+    <div class="">
+      <div class="row justify-content-md-center">
+        <div class="col-2 h5">
+          Type
+        </div>
+        <div class="col-3 h5">
+          Provider
+        </div>
+        <div class="col-2 h5">
+          Group/family
+        </div>
+        <div class="col-5 h5">
+          Buttons
+        </div>
+      </div>
+
+      <div class="row justify-content-md-center" id="insurance1div">
+        <div class="col-2">
+          <p class="fs-6">Dental</p>
+        </div>
+        <div class="col-3">
+          <p class="fs-6">Delta</p>
+        </div>
+        <div class="col-2">
+          <p class="fs-6">G32435/X</p>
+        </div>
+        <div class="col-5">
+          <button id="insurance1button" onclick="insurance1buttonClick()" type="button" class="btn btn-primary btn-sm">Edit</button>
+          <button type="button" class="btn btn-primary btn-sm" disabled>Remove</button>
+          <button id="claims1button" onclick="navigateClaims(1)" type="button" class="btn btn-primary btn-sm">Claims</button>TODO NEED TO MAKE
+        </div>
+        <div id="insurance1Editdiv" class="hiddenSection">
+        HERE WE HAVE STUFF TO EDIT THE INSURANCE ... or maybe a modal? ... and/or disable the buttons?
+        <button id="insurance1Savebutton" onclick="reloadPageClick()" type="button" class="btn btn-primary btn-sm">Save</button>
+        </div>
+
+      </div>
+
+        <div class="row justify-content-md-center" id="insurance2div">
+          <div class="col-2">
+            <p class="fs-6">Health</p>
+          </div>
+          <div class="col-3">
+            <p class="fs-6">BCBS PPO</p>
+          </div>
+          <div class="col-2">
+            <p class="fs-6 text-truncate">J08123-YIAL-19230-3</p>
+          </div>
+          <div class="col-5">
+            <button id="insurance2button" onclick="insurance2buttonClick()" type="button" class="btn btn-primary btn-sm">Edit</button>
+            <button type="button" class="btn btn-primary btn-sm" disabled>Remove</button>
+            <button id="claims2button" onclick="navigateClaims(2)" type="button" class="btn btn-primary btn-sm">Claims</button>BETTER USE OF
+          </div>
+
+      </div>
+
+      <div class="row justify-content-md-center" id="insurance3div">
+        <div class="col-2">
+          <p class="fs-6">Precription</p>
+        </div>
+        <div class="col-3">
+          <p class="fs-6">QuickScripts</p>
+        </div>
+        <div class="col-2">
+          <p class="fs-6 text-truncate">WAC-919</p>
+        </div>
+        <div class="col-5">
+          <button id="insurance3button" onclick="insurance2buttonClick()" type="button" class="btn btn-primary btn-sm">Edit</button>
+          <button type="button" class="btn btn-primary btn-sm" disabled>Remove</button>
+          <button id="claims3button" onclick="navigateClaims(3)" type="button" class="btn btn-primary btn-sm">Claims</button>REAL ESTATE
+        </div>
+
+    </div>
+
+      <div id="insuranceAddButtondiv">
+      <div class="row justify-content-md-center" id="">
+        <div class="col-7">
+          <p class="fs-6"><!--SPACER--></p>
+        </div>
+        <div class="col-5">
+          <button id="insuranceAddbutton" onclick="insuranceAddbuttonClick()" type="button" class="btn btn-primary btn-sm"> Add Insurance Provider </button>
+        </div>
+      </div>
+    </div>
+
+      <div id="insuranceAddSavediv" class="hiddenSection">
+      <div class="row justify-content-md-center hiddenSection" id="asd">
+        <div class="col-2">
+          <div class=" form-floating mb-3">
+            <input id="addType" type="text" class="form-control" placeholder="Type">
+            <label for="addType">Type</label>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class=" form-floating mb-3">
+            <input id="addProvider" type="text" class="form-control" placeholder="Provider">
+            <label for="addProvider">Provider</label>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class=" form-floating mb-3">
+            <input id="addGroup" type="text" class="form-control" placeholder="Group or Family">
+            <label for="addGroup">Group or Family</label>
+          </div>
+        </div>
+        <div class="col-5">
+          <button onclick="insuranceAddSaveButtonClick()" type="button" class="btn btn-primary btn-sm">Save</button>
+          <button onclick="insuranceAddClearButtonClick()" type="button" class="btn btn-primary btn-sm">Clear</button>
+        </div>
+      </div>
+    </div>
+    </div>
+
+
+  </body>
