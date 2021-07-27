@@ -30,20 +30,20 @@
   </div>
 </nav>
 <h1> Patient Select</h1>
-<form action="" method="post">
+<form action="{{ request.path }}" method="post">
 <input class="form-control" type="text"  aria-label="patient" placeholder = "Patient information" name="search" >
 <br>
 <h4> Select one</h4>
 <div class="form-check">
-  <input class="form-check-input" type="checkbox" value="none" id="flexCheckDefault" name="option">
+  <input class="form-check-input" type="checkbox" value="fname" id="flexCheckDefault" name="option">
   <label class="form-check-label" for="flexCheckDefault">
-    None
+    First Name
   </label>
 </div>
 <div class="form-check">
-  <input class="form-check-input" type="checkbox" value="name" id="flexCheckDefault" name="option">
+  <input class="form-check-input" type="checkbox" value="lname" id="flexCheckDefault" name="option">
   <label class="form-check-label" for="flexCheckDefault">
-    Name
+    Last Name
   </label>
 </div>
 <div class="form-check">
@@ -58,9 +58,11 @@
     Gender
   </label>
 </div>
-<input class="btn btn-primary" type="submit" value="search">
+<input class="btn btn-primary" type="submit" value="Search">
 </form>
 <br>
+<form action = "{{ request.path }}" method = "post">
+<input class="btn btn-primary" type="submit" value="Submit Paitent Query">
 <table class="table caption-top">
   <caption>List of paitents</caption>
   <thead>
@@ -70,6 +72,7 @@
       <th scope="col">Last</th>
       <th scope="col">DOB</th>
       <th scope="col">Gender</th>
+      <th scope="col">Select Paitent</th>
     </tr>
   </thead>
   <tbody>
@@ -80,9 +83,11 @@
                   <td>{{ paitent.lastname }}</td>
                   <td>{{ paitent.dob }}</td>
                   <td>{{ paitent.gender }}</td>
+		  <td><input class="form-check-input" type="checkbox" value="select" id="flexCheckChecked" name="select"></td>
                </tr>
      {% endfor %}
   </tbody>
 </table>
+</form>
   </body>
 </html>

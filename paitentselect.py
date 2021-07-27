@@ -22,6 +22,7 @@ class Paitent(db.Model):
 	lastname= db.Column(db.Text)
 	dob= db.Column(db.Text)
 	gender= db.Column(db.Text)
+	chosen= db.Column(db.Boolean)
 	
 
 	def __init__(self, firstname, lastname, dob, gender):
@@ -29,6 +30,7 @@ class Paitent(db.Model):
 		self.lastname=lastname
 		self.dob=dob
 		self.gender=gender
+		self.chosen=False
 		
 
 	
@@ -80,6 +82,11 @@ def indexsearch(search):
             if i.gender == search or i.dob == search or i.firstname+i.lastname == search:
                 paitents.append(i)
         return render_template('paitentselectprototype.html', paitents = paitents)
+@app.route('/submit', methods = ['GET','POST'])
+def indexsubmit():
+        if request.method == 'POST':
+           chosen = request.form.get('select', False) 
+        return render_template('paitentselectprototype.html')
 
 
 if __name__ == '__main__':
