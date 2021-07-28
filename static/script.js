@@ -70,6 +70,7 @@ var main = function () {
             document.getElementById("insuranceButton").classList.remove("disabled");
             document.getElementById("claimsButton").classList.remove("disabled");
             document.getElementById("ordersButton").classList.remove("disabled");
+            document.getElementById("patientInformationButton").classList.remove("disabled");
             document.getElementById("patientHistoryButton").classList.remove("disabled");
         }
 
