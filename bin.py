@@ -552,6 +552,12 @@ def insuranceAdd():
 
     nextInsuranceId = str(currentMax[0]).replace(',','',2).replace(')','',2).replace('(','',2)
 
+    if nextInsuranceId == None:
+        nextInsuranceId = "1"
+
+    if nextInsuranceId == "None":
+        nextInsuranceId = "1"
+
     insertQueryString = "INSERT INTO insurance (id, userId, type, provider, groupFamily) VALUES ('" + nextInsuranceId + "'," + userId + ", '" + insuranceType + "','" + insuranceProvider + "','" + insuranceGroup + "')"
 
     insertQuery(insertQueryString)

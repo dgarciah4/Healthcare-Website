@@ -90,6 +90,7 @@ var main = function () {
             //document.getElementById("ordersButton").classList.remove("disabled");
             document.getElementById("patientInformationButton").classList.remove("disabled");
             document.getElementById("patientHistoryButton").classList.remove("disabled");
+            document.getElementById("messagingButton").classList.remove("disabled");
         }
 
         document.getElementById("navPanelUserWelcome").innerHTML = welcomeMessage;
