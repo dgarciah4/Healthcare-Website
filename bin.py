@@ -69,7 +69,7 @@ def newUserSubmit():
     '" + newUserType + "' \
     )")
 
-    insertQuery("INSERT INTO patientInformation (userId) VALUES ((SELECT (max(userId)) FROM users))")
+    insertQuery("INSERT INTO patientInformation (userId,orientation, dob) VALUES ((SELECT (max(userId)) FROM users),'','')")
     insertQuery("INSERT INTO patientHistory (userId) VALUES  ((SELECT (max(userId)) FROM users))")
 
     return render_template('newUser.html',userAdded="Added " + newUserName)
