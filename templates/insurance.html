@@ -2,18 +2,19 @@
 {% extends "index.html" %}
 
 {% block content %}
+    <BR><BR>
     <div class="">
       <div class="row justify-content-md-center">
-        <div class="col-2 h5">
+        <div class="col-2 h2">
           Type
         </div>
-        <div class="col-3 h5">
+        <div class="col-3 h2">
           Provider
         </div>
-        <div class="col-4 h5">
+        <div class="col-4 h2">
           Group/family
         </div>
-        <div class="col-3 h5">
+        <div class="col-3 h2">
 
         </div>
       </div>
@@ -33,9 +34,10 @@
           <p class="fs-6 text-truncate">{{thisInsurance[2]}}</p>
         </div>
         <div class="col-3">
-          <!--<button type="su" class="btn btn-primary btn-sm">Edit</button>-->
-          <button type="button" class="btn btn-primary btn-sm" >Remove</button>
-          <button id="claims1button" onclick="navigateClaims(1)" type="button" class="btn btn-primary btn-sm">Claims</button>
+            <form action="deleteInsurance" method="post" target="_self">
+                <input name="insuranceId" type="hidden" value="{{ thisInsurance[3] }}">
+          <button type="submit" class="btn btn-primary btn-sm" >Remove</button>
+            </form>
         </div>
 
       </div>

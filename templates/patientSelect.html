@@ -15,11 +15,36 @@
       </div>
 
 
+
+
   </div>
-  <div class="col-2 paddingTop ">
-      <button id="searchButton" type="submit" class="paddingTop btn btn-primary">Search</button>
-  </div>
+    <div class="col-2">
+        <div class=" form-floating mb-3">
+            <input id="searchDob" name="searchDob" type="text" class="form-control" placeholder="searchDob">
+            <label for="searchDob">Date of Birth</label>
+        </div>
+    </div>
+    <div class="col-2 ">
+
+
+        <input type="radio" name="searchGender" value="male" class="form-check-input">
+        <label for="searchGender" class="form-check-label">Male</label><BR>
+        <input type="radio" name="searchGender" value="female" class="form-check-input">
+        <label for="searchGender" class="form-check-label">Female</label><BR>
+        <input type="radio" name="searchGender" value="any" class="form-check-input" checked>
+        <label for="searchGender" class="form-check-label">Any</label>
+
+    </div>
+
+
 </div>
+<div class="row">
+
+    <div class="col-2 paddingTop ">
+        <button id="searchButton" type="submit" class="paddingTop btn btn-primary">Search</button>
+    </div>
+</div>
+
 
 </form>
 
@@ -36,7 +61,9 @@
             </form>
 
           </div>
-        </div>
+            <div class="col-4 paddingTop">
+            {{ thisPatient[2] }}
+            </div>
 
         {% endfor %}
 

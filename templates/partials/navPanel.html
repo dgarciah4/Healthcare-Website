@@ -1,16 +1,33 @@
+<div class="col-2 d-grid gap-2 navPanel" id="leftNavPanel">
 
 <span id="navPanelUserWelcome"></span>
 <image src="../static/images/big_dog.jpg" class="navPanelImage"></image>
 <span id="navPanelPicture"></span>
-<a href="/newUser" class="btn btn-primary" id="newUserButton">New User</a>
-<a href="/patientSelect" class="btn btn-primary" id="selectPatientButton">Select Patient</a>
+<div id="newUserButtonDiv" class="hiddenSection">
+    <div class=" d-grid gap-2">
+        <a href="/newUser" class="btn btn-primary" id="newUserButton">New User</a>
+    </div>
+</div>
+<div id="selectPatientButtonDiv" class="hiddenSection">
+    <div class=" d-grid gap-2">
+        <a href="/patientSelect" class="btn btn-primary" id="selectPatientButton">Select Patient</a>
+    </div>
+</div>
 <a href="/insurance" class="disabled btn btn-primary" id="insuranceButton">Insurance</a>
-<a href="/claims" class="disabled btn btn-primary" id="claimsButton">Claims</a>
-<a href="/orders" class="disabled btn btn-primary" id="ordersButton">Orders</a>
+<!--<a href="/orders" class="disabled btn btn-primary" id="ordersButton">Orders</a>-->
 <a href="/patientInformation" class="disabled btn btn-primary" id="patientInformationButton">Patient Information</a>
 <a href="/patientHistory" class="disabled btn btn-primary" id="patientHistoryButton">Patient History</a>
+<div id="intakeCalendarButtonDiv" class="hiddenSection">
+    <div class=" d-grid gap-2">
+        <a href="/intakeCalendar" class="btn btn-primary" id="intakeCalendarButton">Intake Calendar</a>
+    </div>
+</div>
 
-<button type="button" class="btn btn-primary">Patient Care</button>
-<button type="button" class="btn btn-primary">Messaging</button>
-<button type="button" class="btn btn-primary">Calendar</button>
-<button type="button" class="btn btn-primary">Documents</button>
+<div id="addAppointmentButtonDiv" class="hiddenSection">
+    <div class=" d-grid gap-2">
+        <a href="/addAppointment" class="btn btn-primary" id="addAppointmentButton">Add Appointment</a>
+    </div>
+</div>
+
+<div class="navPanelExtender"></div>
+</div>

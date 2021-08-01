@@ -1,7 +1,13 @@
-from flask import Flask, render_template, request, g ,redirect
+from flask import Flask, render_template, request, g ,redirect, make_response
 import sqlite3
 import json
 import hashlib
+#from datetime import date
+#from datetime import datetime
+
+import datetime #what sadist made an object datetime in package datetime
+
+
 
 app = Flask (__name__)
 
@@ -55,7 +61,7 @@ def newUserSubmit():
     newId = str(newUserId[0]).replace(',','',1).replace(')','',1).replace('(','',1)
 
     insertQuery("INSERT INTO users (userId, name, patientId, userName, password, userType) \
-    VALUES (" + newId + ", \
+    VALUES ((SELECT (max(userId) + 1) FROM users), \
     '" + name + "', \
     '" + newId + "', \
     '" + newUserName + "', \
@@ -63,7 +69,8 @@ def newUserSubmit():
     '" + newUserType + "' \
     )")
 
-    insertQuery("INSERT INTO patientInformation (userId) VALUES " + str(newUserId[0]).replace(',','',1) + "")
+    insertQuery("INSERT INTO patientInformation (userId) VALUES ((SELECT (max(userId)) FROM users))")
+    insertQuery("INSERT INTO patientHistory (userId) VALUES  ((SELECT (max(userId)) FROM users))")
 
     return render_template('newUser.html',userAdded="Added " + newUserName)
 
@@ -98,18 +105,27 @@ def login():
 
 @app.route('/logout')
 def logout():
-    sessionId = request.cookies.get('sessionId') #request.args.get('sessionId')
-    global SESSIONS
-    del SESSIONS[sessionId]
+    try:
+        sessionId = request.cookies.get('sessionId') #request.args.get('sessionId')
+        global SESSIONS
+        del SESSIONS[sessionId]
+    except:
+        return render_template('index.html')
 
-    return render_template('index.html')
+    response = make_response(render_template('index.html'))
+    response.set_cookie('sessionId', '')
+
+    return response
 
 #instrospect is the endpoint that is used to validate tokens
 @app.route('/introspect')
 def introspect():
-    sessionId = request.cookies.get('sessionId') #request.args.get('sessionId')
-    global SESSIONS
-    thisSession = SESSIONS[sessionId]
+    try:
+        sessionId = request.cookies.get('sessionId') #request.args.get('sessionId')
+        global SESSIONS
+        thisSession = SESSIONS[sessionId]
+    except:
+        return None
 
     if thisSession == None:
         return None
@@ -118,11 +134,75 @@ def introspect():
 ###########################################################################
 ###########################################################################
 
+@app.route('/defineTables')
+def defineTables():
+
+    insertQuery("CREATE TABLE IF NOT EXISTS intakeCalendar ( \
+    id INTEGER PRIMARY KEY, \
+    patientName TEXT, \
+    providerName TEXT, \
+    year INTEGER, \
+    julianDay INTEGER, \
+    hour INTEGER )")
+
+    insertQuery("CREATE TABLE IF NOT EXISTS patientHistory ( \
+    userId INTEGER PRIMARY KEY, \
+    last_visit_before TEXT, \
+    date_of_visit TEXT, \
+    health_conditions TEXT, \
+    medications TEXT)")
+
+    insertQuery("CREATE TABLE IF NOT EXISTS patientInformation ( \
+    userId INTEGER PRIMARY KEY, \
+    address TEXT, \
+    city TEXT, \
+    state TEXT, \
+    zip TEXT, \
+    phoneH TEXT, \
+    phoneCW TEXT, \
+    dob TEXT, \
+    SSN TEXT, \
+    occupation TEXT, \
+    employer TEXT, \
+    email TEXT, \
+    orientation TEXT, \
+    relationshipStatus TEXT )")
+
+    insertQuery("CREATE TABLE IF NOT EXISTS users ( userId INTEGER PRIMARY KEY, \
+    name TEXT NOT NULL, patientId TEXT, userName TEXT NOT NULL, password TEXT NOT NULL, \
+    userType TEXT NOT NULL )")
+
+    insertQuery("CREATE TABLE IF NOT EXISTS insurance ( id INTEGER PRIMARY KEY, userId INTEGER NOT NULL, \
+    type TEXT NOT NULL, provider TEXT NOT NULL, groupFamily TEXT NOT NULL)")
+
+
+
+    return "GOOD"
 
 ###########################################################################
 ####################################Single Routes##########################
 @app.route('/setUpUsers')
 def setUpUsers():
+
+
+    #insertQuery("drop table intakeCalendar")
+
+    #insertQuery("CREATE TABLE IF NOT EXISTS intakeCalendar ( \
+    #id INTEGER PRIMARY KEY, \
+    #patientName TEXT, \
+    #providerName TEXT, \
+    #year INTEGER, \
+    #julianDay INTEGER, \
+    #hour INTEGER )")
+
+
+    #insertQuery("CREATE TABLE IF NOT EXISTS patientHistory ( \
+    #userId INTEGER PRIMARY KEY, \
+    #last_visit_before TEXT, \
+    #date_of_visit TEXT, \
+    #health_conditions TEXT, \
+    #medications TEXT)")
+
 
     #insertQuery("CREATE TABLE IF NOT EXISTS patientInformation ( \
     #userId INTEGER PRIMARY KEY, \
@@ -199,14 +279,14 @@ def setUpUsers():
     #insertQuery("INSERT INTO users (userId, name, patientId, userName, password, userType) VALUES (18,'Home Made', 'RLONGPATIENTID5778','user17','pass','patient')")
     #insertQuery("INSERT INTO users (userId, name, patientId, userName, password, userType) VALUES (19,'Tasty Treat', 'LONGPATIENTID588','user18','pass','patient')")
 
-    global SESSIONS
-    SESSIONS['81538bb3bf61fa90eea389a130bf50f2'] = SessionObject()
-    thisSession = SESSIONS['81538bb3bf61fa90eea389a130bf50f2']
-    thisSession.sessionId = "81538bb3bf61fa90eea389a130bf50f2"
-    thisSession.patient = getPatientFromUserId(9)
-    thisSession.userType= "provider"
-    thisSession.loggedInName = ""
-    thisSession.loggedInUserId = 1
+    #global SESSIONS
+    #SESSIONS['81538bb3bf61fa90eea389a130bf50f2'] = SessionObject()
+    #thisSession = SESSIONS['81538bb3bf61fa90eea389a130bf50f2']
+    #thisSession.sessionId = "81538bb3bf61fa90eea389a130bf50f2"
+    #thisSession.patient = getPatientFromUserId(9)
+    #thisSession.userType= "provider"
+    #thisSession.loggedInName = ""
+    #thisSession.loggedInUserId = 1
 
     return render_template('setUpUsers.html')
 
@@ -216,9 +296,13 @@ def index():
 
 @app.route('/getWelcomeMessage')
 def getWelcomeMessage():
-    sessionId = request.cookies.get('sessionId') #request.args.get('sessionId')
-    global SESSIONS
-    thisSession = SESSIONS[sessionId]
+    try:
+        sessionId = request.cookies.get('sessionId') #request.args.get('sessionId')
+        global SESSIONS
+        thisSession = SESSIONS[sessionId]
+    except:
+        return "Select Patient To Proceed"
+
     thisSession.patientName = getPatientFromUserId(thisSession.loggedInUserId).name
 
     if thisSession.patient == None:
@@ -229,6 +313,16 @@ def getWelcomeMessage():
 
     return "Welcome " + thisSession.patientName
 
+@app.route('/getUserType')
+def getUserType():
+    try:
+        sessionId = request.cookies.get('sessionId') #request.args.get('sessionId')
+        global SESSIONS
+        thisSession = SESSIONS[sessionId]
+    except:
+        return ""
+
+    return thisSession.userType
 
 ###########################################################################
 ###########################################################################
@@ -240,38 +334,57 @@ def getWelcomeMessage():
 #This is initial landing to page with no submitted data
 @app.route('/patientSelect')
 def patientSelect():
-    sessionId = request.cookies.get('sessionId') #request.args.get('sessionId')
-    allowAccess = verifyProviderAccess(sessionId)
-
-    if allowAccess == False:
-        return render_template('notAllowed.html')
+    try:
+        sessionId = request.cookies.get('sessionId') #request.args.get('sessionId')
+        allowAccess = verifyProviderAccess(sessionId)
+        if allowAccess == False:
+            return render_template('notAllowed.html')
+    except:
+        return render_template('index.html')
 
     return render_template('patientSelect.html')
 
 
 @app.route('/patientSearchCriteria', methods=['POST'])
 def patientSearchCriteria():
-    sessionId = request.cookies.get('sessionId') #request.args.get('sessionId')
-    allowAccess = verifyProviderAccess(sessionId)
+    try:
+        sessionId = request.cookies.get('sessionId') #request.args.get('sessionId')
+        allowAccess = verifyProviderAccess(sessionId)
+        if allowAccess == False:
+            return render_template('notAllowed.html')
+    except:
+        return render_template('index.html')
 
-    if allowAccess == False:
-        return render_template('notAllowed.html')
 
     searchCriteria = request.form['searchText']
+    searchDob = request.form['searchDob']
+    searchGender = request.form['searchGender']
 
-    searchResults = query_db("SELECT userId, name FROM users WHERE userType = 'patient' AND \
-    lower(name) LIKE '%" + searchCriteria.lower() + "%' order by userId desc limit 10")
+    if(searchGender == "any"):
+        searchGender = ""
+
+    queryText = "SELECT pi.userId, u.name, pi.dob FROM patientInformation pi \
+    , users u WHERE u.userId = pi.userId AND userType = 'patient' \
+    AND lower(name) LIKE '%" + searchCriteria.lower() + "%' \
+    AND lower(dob) LIKE '%" + searchDob.lower() + "%' \
+    AND lower(orientation) LIKE '%" + searchGender.lower() + "%' \
+    order by pi.userId desc limit 10"
+
+    searchResults = query_db(queryText)
 
     return render_template('patientSelect.html',searchResults=searchResults)
 
 
 @app.route('/patientSelectSubmit', methods=['POST'])
 def patientSelectSubmit():
-    sessionId = request.cookies.get('sessionId') #request.args.get('sessionId')
-    allowAccess = verifyProviderAccess(sessionId)
+    try:
+        sessionId = request.cookies.get('sessionId') #request.args.get('sessionId')
+        allowAccess = verifyProviderAccess(sessionId)
+        if allowAccess == False:
+            return render_template('notAllowed.html')
+    except:
+        return render_template('index.html')
 
-    if allowAccess == False:
-        return render_template('notAllowed.html')
 
     patientUserId = request.form['patientId']
 
@@ -283,27 +396,144 @@ def patientSelectSubmit():
 ###########################################################################
 ###########################################################################
 
+
+
+
+###########################################################################
+############################Insurance Routes###############################
+
+@app.route('/intakeCalendar')
+def intakeCalendar():
+    try:
+        sessionId = request.cookies.get('sessionId') #request.args.get('sessionId')
+        global SESSIONS
+        thisSession = SESSIONS[sessionId]
+    except:
+        return render_template('index.html')
+
+    try:
+        whichCalendar = request.args.get('calendar')
+        newDate = request.args.get('newDate')
+    except:
+        whichCalendar = ""
+        if newDate == None:
+            newDate = datetime.date.today().strftime("%j")
+
+    if newDate == None:
+        newDate = datetime.date.today().strftime("%j")
+
+    datetime_object = datetime.datetime.strptime(newDate + ' 2021', '%j %Y')
+    weekday = datetime_object.strftime("%A")
+    nextDay = (datetime_object + datetime.timedelta(days=1)).strftime("%j")
+    previousDay = (datetime_object + datetime.timedelta(days=-1)).strftime("%j")
+
+    retCalendar = query_db("SELECT hour, patientName,providerName \
+    FROM \
+    intakeCalendar \
+    WHERE \
+    julianDay = '" + str(newDate) + "' ")
+
+    return render_template('intakeCalendarDaily.html', schedule=retCalendar, weekday=weekday, currentJulian=newDate, previousDay=previousDay, nextDay=nextDay)
+
+@app.route('/addAppointment')
+def addAppointment():
+    try:
+        sessionId = request.cookies.get('sessionId') #request.args.get('sessionId')
+        global SESSIONS
+        thisSession = SESSIONS[sessionId]
+    except:
+        return render_template('index.html')
+
+    today = datetime.date.today()
+    julianDate = today.strftime("%j")
+
+    return render_template('addAppointment.html',julianDate=julianDate)
+
+@app.route('/addAppointmentSubmit', methods=['POST'])
+def addAppointmentSubmit():
+    try:
+        sessionId = request.cookies.get('sessionId') #request.args.get('sessionId')
+        global SESSIONS
+        thisSession = SESSIONS[sessionId]
+    except:
+        return render_template('index.html')
+
+    patientName = request.form['patientName']
+    providerName = request.form['providerName']
+    appointmentDate = request.form['appointmentDate']
+    appointmentTime = request.form['appointmentTime']
+
+    insertQueryString = "insert into intakeCalendar (id, patientName, providerName, \
+     year, julianDay, hour) VALUES ((select max(id) + 1 from intakeCalendar), \
+    '" + patientName + "', \
+    '" + providerName + "', \
+    '2021', \
+    '" + appointmentDate + "', \
+    '" + appointmentTime + "')"
+
+    insertQuery(insertQueryString)
+
+    today = datetime.date.today()
+    julianDate = today.strftime("%j")
+
+    return render_template('addAppointment.html',julianDate=julianDate)
+
+
+###########################################################################
+###########################################################################
+
+
+
+
+
+
+
+
 ###########################################################################
 ############################Insurance Routes###############################
 
 @app.route('/insurance')
 def insurance():
-    sessionId = request.cookies.get('sessionId') #request.args.get('sessionId')
+    try:
+        sessionId = request.cookies.get('sessionId') #request.args.get('sessionId')
+        global SESSIONS
+        thisSession = SESSIONS[sessionId]
+    except:
+        return render_template('index.html')
 
-    global SESSIONS
-    thisSession = SESSIONS[sessionId]
     userId = thisSession.patient.userId
 
-    retInsurance = query_db("SELECT type, provider, groupFamily FROM insurance \
+    retInsurance = query_db("SELECT type, provider, groupFamily, id FROM insurance \
     WHERE userId = '" + str(userId) + "'")
 
     return render_template('insurance.html',insurances=retInsurance)
 
+
+@app.route('/deleteInsurance', methods=['POST'])
+def deleteInsurance():
+    try:
+        sessionId = request.cookies.get('sessionId') #request.args.get('sessionId')
+        global SESSIONS
+        thisSession = SESSIONS[sessionId]
+    except:
+        return render_template('index.html')
+
+    insuranceId = request.form['insuranceId']
+
+    insertQuery("delete from insurance where id = '" + insuranceId + "'")
+
+    return redirect('insurance')
+
+
 @app.route('/insuranceAdd', methods=['POST'])
 def insuranceAdd():
-    sessionId = request.cookies.get('sessionId') #request.args.get('sessionId')
-    global SESSIONS
-    thisSession = SESSIONS[sessionId]
+    try:
+        sessionId = request.cookies.get('sessionId') #request.args.get('sessionId')
+        global SESSIONS
+        thisSession = SESSIONS[sessionId]
+    except:
+        return render_template('index.html')
+
     userId = thisSession.patient.userId
 
     insuranceType = request.form['addType']
@@ -326,8 +556,12 @@ def insuranceAdd():
 
 
 def verifyProviderAccess(sessionId):
-    global SESSIONS
-    thisSession = SESSIONS[sessionId]
+    try:
+        global SESSIONS
+        thisSession = SESSIONS[sessionId]
+    except:
+        return False
+
     if thisSession == None:
         return False
     if thisSession.userType == "provider":
@@ -336,11 +570,12 @@ def verifyProviderAccess(sessionId):
     return False
 
 def getPatientFromUserId(userId):
-    thisPatientQueryResult = query_db("SELECT name, patientId, userId FROM users WHERE userId = '" + str(userId) + "'")
+    thisPatientQueryResult = query_db("SELECT name, patientId, userId, userType FROM users WHERE userId = '" + str(userId) + "'")
     retPatient = PatientObject()
     retPatient.name = str(thisPatientQueryResult[0][0])
     retPatient.patientId = str(thisPatientQueryResult[0][1])
     retPatient.userId = str(thisPatientQueryResult[0][2])
+    retPatient.userTYpe = str(thisPatientQueryResult[0][3])
     return retPatient
 
 ###########################################################################
@@ -414,19 +649,30 @@ class PatientObject:
 
 @app.route('/patientInformation', methods = ['POST', 'GET'])
 def patientInformation():
-    sessionId = request.cookies.get('sessionId') #request.args.get('sessionId')
-    global SESSIONS
-    thisSession = SESSIONS[sessionId]
+    try:
+        sessionId = request.cookies.get('sessionId') #request.args.get('sessionId')
+        global SESSIONS
+        thisSession = SESSIONS[sessionId]
+    except:
+        return render_template('index.html')
+
     userId = thisSession.patient.userId
-    patientInformation = query_db("SELECT * FROM patientInformation WHERE userId = '" + userId + "'")
+
+    selectQuery = "SELECT * FROM patientInformation WHERE userId = '" + userId + "'"
+
+    patientInformation = query_db(selectQuery)
 
     return render_template('patientInformation.html',patientInformation=patientInformation[0])
 
 @app.route('/patientInformationUpdate', methods = ['POST', 'GET'])
 def patientInformationUpdate():
-    sessionId = request.cookies.get('sessionId') #request.args.get('sessionId')
-    global SESSIONS
-    thisSession = SESSIONS[sessionId]
+    try:
+        sessionId = request.cookies.get('sessionId') #request.args.get('sessionId')
+        global SESSIONS
+        thisSession = SESSIONS[sessionId]
+    except:
+        return render_template('index.html')
+
     userId = thisSession.patient.userId
 
     address = request.form['address']
@@ -459,15 +705,40 @@ def patientInformationUpdate():
     occupation = '" + occupation + "', \
     employer = '" + employer + "', \
     email = '" + email + "', \
-    gender = '" + gender + "', \
-    status = '" + status + "' WHERE \
-    userId = '" + userId + "'";
+    orientation = '" + gender + "', \
+    relationshipStatus = '" + status + "' WHERE \
+    userId = '" + userId + "'"
+
+
+    insertQuery(insertQueryString)
 
     return redirect('patientInformation')
 
 @app.route('/patientHistory', methods = ['POST', 'GET'])
 def patientHistory():
-    return render_template('patientHistory.html')
+    try:
+        sessionId = request.cookies.get('sessionId') #request.args.get('sessionId')
+        global SESSIONS
+        thisSession = SESSIONS[sessionId]
+    except:
+        return render_template('index.html')
+    userId = thisSession.patient.userId
+    patientHistoryTuples = query_db("select * from patientHistory where userid = '" + userId + "'")
+
+    print("patientHistoryTuples " + str(len(patientHistoryTuples)))
+    print("patientHistoryTuples " + str(len(patientHistoryTuples)))
+    print("patientHistoryTuples " + str(len(patientHistoryTuples)))
+    print("patientHistoryTuples " + str(len(patientHistoryTuples)))
+    print("patientHistoryTuples " + str(len(patientHistoryTuples)))
+
+    if len(patientHistoryTuples) > 0:
+        retPatientHistory = patientHistoryTuples[0]
+    if len(patientHistoryTuples) == 0:
+        retPatientHistory = None
+
+
+
+    return render_template('patientHistory.html', patientHistory = retPatientHistory)
 
 @app.route('/patientHistoryUpdate', methods = ['POST', 'GET'])
 def patientHistoryUpdate():
@@ -479,45 +750,43 @@ def patientHistoryRetrieve():
 
 @app.route('/formProcess', methods = ['POST', 'GET'])
 def formProcess():
+    try:
+        sessionId = request.cookies.get('sessionId') #request.args.get('sessionId')
+        global SESSIONS
+        thisSession = SESSIONS[sessionId]
+    except:
+        return render_template('index.html')
+    userId = thisSession.patient.userId
+
     if request.method == 'POST':
         try:
-            first_name = request.form.get('fname')
-            middle_name = request.form.get('mname')
-            last_name = request.form.get('lname')
-            address = request.form.get('address')
-            city = request.form.get('city')
-            state = request.form.get('state')
-            zip_code = request.form.get('zip')
-            phone_h = request.form.get('home_phone')
-            phone_c_w = request.form.get('cell_work_phone')
-            dob = request.form.get('dob')
-            ssn = request.form.get('ss#')
-            occupation = request.form.get('occupation')
-            employer = request.form.get('employer')
-            email = request.form.get('email')
-            insurance_provider = request.form.get('insurance-provider')
-            sexual_orientation = request.form.get('gender')
-            relationship_status = request.form.get('status')
             last_visit_before = request.form.get('visit')
             date_of_visit = request.form.get('lastvisit')
             health_conditions = request.form.get('health-conditions')
             medications = request.form.get('medication')
-
-            with sqlite3.connect('patient.db') as conn:
-                c = conn.cursor()
-
-                c.execute("""INSERT INTO patients (first_name,middle_name,last_name,address,city,state,zip,phone_h,phone_c_w,dob,ssn,occupation,employer,email,insurance_provider,sexual_orientation,relationship_status,last_visit_before,date_of_visit,health_conditions,medications)
-                    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""", (first_name,middle_name,last_name,address,city,state,zip_code,phone_h,phone_c_w,dob,ssn,occupation,employer,email,insurance_provider,sexual_orientation,relationship_status,last_visit_before,date_of_visit,health_conditions,medications))
-
-                conn.commit()
-                result = 'You have submitted your form successfully'
         except:
-            conn.rollback()
-            result = 'There was an error when attempting to submit your form'
+            if last_visit_before == None:
+                last_visit_before = ""
+            if date_of_visit == None:
+                date_of_visit = ""
+            if health_conditions == None:
+                health_conditions = ""
+            if medications == None:
+                medications = ""
 
-        finally:
-            return render_template('feedback.html', result=result)
-            conn.close()
+
+        insertQuery("delete from patientHistory where userid = '" + userId + "'")
+        insertQuery("insert into patientHistory (userId, last_visit_before,date_of_visit, \
+        health_conditions,medications) VALUES ( \
+        '" + userId + "', \
+        '" + last_visit_before + "', \
+        '" + date_of_visit + "', \
+        '" + health_conditions + "', \
+        '" + medications + "')")
+
+        result = 'You have submitted your form successfully'
+
+        return redirect('patientHistory')
 
 @app.route('/formUpdate', methods = ['POST', 'GET'])
 def formUpdate():

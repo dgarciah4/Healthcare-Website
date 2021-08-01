@@ -66,10 +66,26 @@ var main = function () {
             async: false
         }).responseText;
 
+        var userType = $.ajax({
+            url: "/getUserType",
+            async: false
+        }).responseText;
+
+        if(userType == "provider"){
+            document.getElementById("newUserButtonDiv").classList.remove("hiddenSection");
+            document.getElementById("selectPatientButtonDiv").classList.remove("hiddenSection");
+            document.getElementById("intakeCalendarButtonDiv").classList.remove("hiddenSection");
+            document.getElementById("addAppointmentButtonDiv").classList.remove("hiddenSection");
+        } else {
+            document.getElementById("newUserButtonDiv").classList.add("hiddenSection");
+            document.getElementById("selectPatientButtonDiv").classList.add("hiddenSection");
+            document.getElementById("intakeCalendarButtonDiv").classList.add("hiddenSection");
+            document.getElementById("addAppointmentButtonDiv").classList.add("hiddenSection");
+        }
+
         if(welcomeMessage != "Select Patient To Proceed"){
             document.getElementById("insuranceButton").classList.remove("disabled");
-            document.getElementById("claimsButton").classList.remove("disabled");
-            document.getElementById("ordersButton").classList.remove("disabled");
+            //document.getElementById("ordersButton").classList.remove("disabled");
             document.getElementById("patientInformationButton").classList.remove("disabled");
             document.getElementById("patientHistoryButton").classList.remove("disabled");
         }
@@ -86,12 +102,20 @@ var main = function () {
 $(document).ready(main);
 
 
+function logout(){
+    document.cookie = "; Path=/; Expires=Sat, 31 Dec 2000 00:00:01 GMT;"
 
+    var logoutResults = $.ajax({
+        url: "/logout",
+        async: false
+    }).responseText;
+
+}
 
 
 var sectionList = ["mainPage","resume","contact","portfolio"];
 
-var myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {});
+//var myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {});
 
 function navigateClaims(insuranceId){
 
