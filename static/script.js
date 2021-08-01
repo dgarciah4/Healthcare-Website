@@ -76,11 +76,13 @@ var main = function () {
             document.getElementById("selectPatientButtonDiv").classList.remove("hiddenSection");
             document.getElementById("intakeCalendarButtonDiv").classList.remove("hiddenSection");
             document.getElementById("addAppointmentButtonDiv").classList.remove("hiddenSection");
+            document.getElementById("createEmployeeButtonDiv").classList.remove("hiddenSection");
         } else {
             document.getElementById("newUserButtonDiv").classList.add("hiddenSection");
             document.getElementById("selectPatientButtonDiv").classList.add("hiddenSection");
             document.getElementById("intakeCalendarButtonDiv").classList.add("hiddenSection");
             document.getElementById("addAppointmentButtonDiv").classList.add("hiddenSection");
+            document.getElementById("createEmployeeButtonDiv").classList.add("hiddenSection");
         }
 
         if(welcomeMessage != "Select Patient To Proceed"){
