@@ -377,6 +377,13 @@ def patientSearchCriteria():
     AND lower(dob) LIKE '%" + searchDob.lower() + "%' \
     AND lower(orientation) LIKE '%" + searchGender.lower() + "%' \
     order by pi.userId desc limit 10"
+    if searchGender == "male":
+        queryText = "SELECT pi.userId, u.name, pi.dob FROM patientInformation pi \
+        , users u WHERE u.userId = pi.userId AND userType = 'patient' \
+        AND lower(name) LIKE '%" + searchCriteria.lower() + "%' \
+        AND lower(dob) LIKE '%" + searchDob.lower() + "%' \
+        AND lower(orientation) NOT LIKE '%" + "fe" + "%' \
+        order by pi.userId desc limit 10"
 
     searchResults = query_db(queryText)
 
